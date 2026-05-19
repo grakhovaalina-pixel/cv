@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммуникация и стресс на работе</title>
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-text-primary: #111111;
+    --color-text-secondary: #555555;
+    --color-text-tertiary: #999999;
+    --color-border-tertiary: #e5e5e5;
+    --color-border-secondary: #cccccc;
+    --border-radius-lg: 12px;
+    --border-radius-md: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f0f0ef;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 2rem 1rem;
+  }
+
+  .deck { display: flex; flex-direction: column; gap: 2rem; max-width: 860px; margin: 0 auto; padding: 1rem 0; }
+
+  /* ── SLIDE BASE ── */
+  .slide {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem 2.25rem;
+    position: relative;
+  }
+
+  .slide-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .slide-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .slide-body {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .divider {
+    height: 0.5px;
+    background: var(--color-border-tertiary);
+    margin: 1.25rem 0;
+  }
+
+  /* ── SLIDE 0 (INTRO) ── */
+  .slide-intro .intro-body {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .slide-intro .intro-body p {
+    margin-bottom: 1rem;
+  }
+
+  .slide-intro .intro-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .intro-stat {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+  }
+
+  .intro-stat-num {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+
+  .intro-stat-text {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+    margin-bottom: 0.3rem;
+  }
+
+  .intro-stat-link {
+    display: block;
+    font-size: 10.5px;
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    word-break: break-word;
+    margin-top: 0.25rem;
+  }
+
+  .intro-stat-link:hover {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+  }
+
+  /* ── STATS GRID (slides 1–4) ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 1.25rem;
+  }
+
+  .stat-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+  }
+
+  .stat-number {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .stat-source {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECTORS ── */
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 1.25rem;
+  }
+
+  .sector-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem 1.1rem;
+  }
+
+  .sector-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .sector-text {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+  }
+
+  .sector-stat {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+
+  /* ── PERSONAS ── */
+  .personas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+
+  .persona-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.85rem 1rem;
+  }
+
+  .persona-title {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .persona-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 0.25rem;
+  }
+
+  .persona-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 40px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .persona-value {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .pain-dots { display: flex; gap: 3px; align-items: center; }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-border-secondary);
+  }
+
+  .dot.filled { background: var(--color-text-primary); }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    margin-top: 1.25rem;
+    overflow-x: auto;
+  }
+
+  table.matrix {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+
+  table.matrix th {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  table.matrix th.left-col { text-align: left; width: 130px; }
+
+  table.matrix td {
+    text-align: center;
+    padding: 0.45rem 0.5rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  table.matrix td.role {
+    text-align: left;
+    color: var(--color-text-secondary);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  table.matrix td.p3 { color: #1D9E75; }
+  table.matrix td.p2 { color: var(--color-text-secondary); }
+  table.matrix td.p1 { color: var(--color-text-tertiary); }
+
+  .priority-key {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .key-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    color: var(--color-text-secondary);
+  }
+
+  .key-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .rec-box {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.9rem 1.1rem;
+    margin-top: 1.25rem;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    border-left: 2.5px solid #1D9E75;
+  }
+
+  .rec-box strong {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  /* ── SLIDES 5–8 ── */
+  .slide-subtitle {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.25rem;
+    font-style: italic;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.35rem;
+  }
+
+  .body-text {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .stat-block {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+  }
+
+  .stat-num {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .stat-source-small {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 0.3rem;
+  }
+
+  .stats-col { display: flex; flex-direction: column; gap: 10px; }
+
+  .jtbd-box {
+    border-left: 2.5px solid #1D9E75;
+    padding-left: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  .jtbd-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #1D9E75;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.2rem;
+  }
+
+  .jtbd-text {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .why-box {
+    border-left: 2.5px solid var(--color-border-secondary);
+    padding-left: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  .why-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.2rem;
+  }
+
+  .why-text {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 1rem;
+  }
+
+  .q-group { margin-bottom: 1rem; }
+
+  .q-group-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .q-list { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .q-item {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    padding-left: 0.75rem;
+    position: relative;
+  }
+
+  .q-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+    font-size: 11px;
+  }
+
+  .intro-box {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.85rem 1rem;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- SLIDE 0 — INTRO -->
+  <div class="slide slide-intro">
+    <div class="slide-num">Слайд 0</div>
+    <div class="slide-title">Почему рабочая коммуникация — это навык, а не характер</div>
+    <div class="divider"></div>
+    <div class="intro-body">
+      <p>Сегодня почти любая профессия строится на взаимодействии с людьми — и коммуникативность из абстрактного пункта в резюме превратилась в базовое требование к специалисту. Не уметь держать позицию на встрече, объяснять свою точку зрения, работать с возражениями — это уже не личная особенность характера, а профессиональный пробел, от которого может страдать и команда, и компания.</p>
+      <p>Но есть и вторая сторона: от провалов в профессиональных ситуациях страдает и сам исполнитель. Работа определяет, кем мы себя считаем, какую жизнь ведём, где живём, что можем себе позволить. Неудачный разговор с руководителем или клиентом — это уже не просто неловкость, а потенциальный удар по уровню жизни и психологическому благополучию. Из-за этого страха ошибки даже сильные специалисты могут теряться под давлением, избегать сложных разговоров или часами прокручивают их после.</p>
+      <p>Говорить уверенно, держать позицию, выходить из напряжённых ситуаций без потерь — эти навыки важны в любой сфере жизни. Но нигде они не конвертируются так быстро и так ощутимо, как здесь.</p>
+    </div>
+    <div class="intro-stats">
+      <div class="intro-stat">
+        <div class="intro-stat-num">№1</div>
+        <div class="intro-stat-text">Коммуникация — навык №1 по версии LinkedIn, среди миллиарда пользователей и миллионов вакансий</div>
+        <a class="intro-stat-link" href="https://www.linkedin.com/business/talent/blog/talent-strategy/linkedin-most-in-demand-hard-and-soft-skills" target="_blank">linkedin.com</a>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">22%</div>
+        <div class="intro-stat-text">россиян называют работу главным источником стресса в жизни</div>
+        <a class="intro-stat-link" href="https://www.vedomosti.ru/society/news/2022/07/25/932842-vtsiom-rossiyane" target="_blank">vedomosti.ru</a>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">61%</div>
+        <div class="intro-stat-text">сотрудников прокручивают неприятные рабочие разговоры уже после работы</div>
+        <a class="intro-stat-link" href="https://www.itpro.com/software/business-apps/watch-your-tone-at-work-atlassian-warns-poor-communication-and-blunt-messages-are-confusing-colleagues-and-its-having-a-serious-impact-on-productivity" target="_blank">itpro.com</a>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">42%</div>
+        <div class="intro-stat-text">испытывают стресс при попытке выбрать правильный тон в ответе</div>
+        <a class="intro-stat-link" href="https://www.forbes.com/advisor/business/digital-communication-workplace/" target="_blank">forbes.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 1</div>
+    <div class="slide-title">Рабочие коммуникации — главный источник стресса</div>
+    <div class="slide-body">
+      Мы проводим на работе треть жизни — и именно здесь коммуникации стоят дороже всего. В отношениях с партнёром или другом можно взять паузу, объяснить позже, попросить прощения. В профессиональной среде каждый разговор — это переговоры: с руководителем, клиентом, коллегой. Здесь важно не просто быть понятым, но и правильно себя поставить. Цена неверного слова — потеря доверия, карьеры или контракта. При этом большинство людей не получают ни инструментов, ни практики для таких ситуаций. Коммуникационный стресс на работе — не частная проблема отдельных людей, а массовое явление, которое напрямую влияет на здоровье, продуктивность и желание продолжать работать.
+    </div>
+    <div class="divider"></div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">45%</div>
+        <div class="stat-label">россиян испытывают сильный стресс на работе</div>
+        <div class="stat-source">hh.ru + Alter</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">39%</div>
+        <div class="stat-label">называют отношения с руководством главным источником стресса</div>
+        <div class="stat-source">The Moscow Times / hh.ru</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">61%</div>
+        <div class="stat-label">сотрудников прокручивают неприятные разговоры после работы</div>
+        <div class="stat-source">Atlassian</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">42%</div>
+        <div class="stat-label">испытывают стресс при попытке выбрать правильный тон в ответе</div>
+        <div class="stat-source">Forbes Advisor</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 2</div>
+    <div class="slide-title">Где коммуникационный стресс острее всего</div>
+    <div class="slide-body">
+      Не все профессии одинаково уязвимы. Там, где результат зависит от переговоров, защиты позиции или работы с негативом — коммуникационная нагрузка максимальна.
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-title">Маркетинг / PR / реклама / креатив</div>
+        <div class="sector-text">Одна из самых эмоционально нестабильных отраслей: постоянное согласование с клиентами, защита идей, отстаивание бюджетов. Специалисты регулярно оказываются между творческой позицией и давлением заказчика.</div>
+        <div class="sector-stat">Каждый второй специалист сталкивается с выгоранием — особенно рекламщики, PR и SMM (RB.ru)</div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-title">Продажи</div>
+        <div class="sector-text">Специалисты по продажам — под давлением плана, клиентов и менеджеров одновременно. Каждый разговор — это переговоры с реальными ставками: отказ, скидка, срыв сделки.</div>
+        <div class="sector-stat">39% работодателей считают продажников наиболее подверженными выгоранию — 1-е место (hh.ru + AIBY)</div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-title">Сервис и поддержка</div>
+        <div class="sector-text">Наиболее токсичная по коммуникационной нагрузке среда: постоянный поток агрессивных и фрустрированных клиентов, плюс внутренние конфликты в команде. Стресс здесь структурный, а не ситуативный.</div>
+        <div class="sector-stat">87% работников колл-центров — высокий уровень стресса; выгорание в 2025 году достигло 66% (Cornell / HubSpot)</div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-title">Финансы</div>
+        <div class="sector-text">Высокие ставки в каждом разговоре: переговоры с инвесторами, клиентами, регуляторами. Ошибка в коммуникации — репутационный и финансовый риск. Отрасль входит в топ-5 самых стрессовых в мире.</div>
+        <div class="sector-stat">67% работников финансового сектора сообщают о стрессе на работе (Spill / британские данные)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 3</div>
+    <div class="slide-title">Кто испытывает эту боль</div>
+    <div class="slide-body">
+      Шесть профилей, у каждого — своя точка боли и своя цель в переговорах.
+    </div>
+    <div class="personas-grid">
+      <div class="persona-card">
+        <div class="persona-title">Джун в продажах / менеджменте</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">Теряется под давлением, боится сложных разговоров, после созвона прокручивает «надо было сказать иначе»</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Чувствовать себя профессионально уверенным — прямо сейчас, не через 5 лет</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-title">Соискатель</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">Теряется на интервью, паникует под давлением, не знает как ответить на каверзный вопрос</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Войти в переговорную комнату и не потеряться</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-title">Фрилансер / client-facing специалист</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">Токсичные клиенты, неумение держать границы, соглашается — хотя понимает, что не стоило</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Перестать чувствовать себя слабым и продавленным</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-title">Менеджер / новый тимлид</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">После повышения столкнулся с необходимостью давать фидбек, управлять конфликтами, иногда увольнять</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Вести сложные разговоры без потери авторитета</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-title">Топ-менеджер / основатель</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">Давление инвесторов, переговоры с высокими ставками, управление репутацией и конфликтами в команде</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Управлять любой переговорной ситуацией с позиции силы</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-title">Customer support / success</div>
+        <div class="persona-row">
+          <div class="persona-label">Боль</div>
+          <div class="persona-value">Ежедневный поток агрессии, невозможность де-эскалировать, эмоциональное выгорание</div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Острота</div>
+          <div class="persona-value">
+            <div class="pain-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="persona-row">
+          <div class="persona-label">Цель</div>
+          <div class="persona-value">Выходить из сложных разговоров с клиентами без внутреннего надлома</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 4</div>
+    <div class="slide-title">Приоритизация: кого запускаем первыми</div>
+    <div class="slide-body">
+      Пересечение роли и отрасли — где боль наиболее реальная, частая и готовая к монетизации.
+    </div>
+    <div class="table-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th class="left-col">Роль ↓ / Сфера →</th>
+            <th>Маркетинг / PR</th>
+            <th>Продажи</th>
+            <th>Поддержка</th>
+            <th>Финансы</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="role">Джун / нач. специалист</td>
+            <td class="p3">3</td><td class="p3">3</td><td class="p2">2</td><td class="p2">2</td>
+          </tr>
+          <tr>
+            <td class="role">Соискатель</td>
+            <td class="p3">3</td><td class="p3">3</td><td class="p2">2</td><td class="p2">2</td>
+          </tr>
+          <tr>
+            <td class="role">Фрилансер / client-facing</td>
+            <td class="p3">3</td><td class="p2">2</td><td class="p2">2</td><td class="p1">1</td>
+          </tr>
+          <tr>
+            <td class="role">Менеджер / тимлид</td>
+            <td class="p2">2</td><td class="p2">2</td><td class="p2">2</td><td class="p2">2</td>
+          </tr>
+          <tr>
+            <td class="role">Топ-менеджер / основатель</td>
+            <td class="p1">1</td><td class="p1">1</td><td class="p1">1</td><td class="p2">2</td>
+          </tr>
+          <tr>
+            <td class="role">Customer support / success</td>
+            <td class="p1">1</td><td class="p1">1</td><td class="p3">3</td><td class="p1">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="priority-key">
+      <div class="key-item"><div class="key-dot" style="background:#1D9E75;"></div>3 — высокий приоритет</div>
+      <div class="key-item"><div class="key-dot" style="background:var(--color-text-secondary);"></div>2 — средний</div>
+      <div class="key-item"><div class="key-dot" style="background:var(--color-border-secondary);"></div>1 — отложить</div>
+    </div>
+    <div class="rec-box">
+      <strong>Стратегия запуска.</strong> Начинаем с джунов, фрилансеров и соискателей — это B2C с очевидной болью, коротким циклом принятия решений и низкой стоимостью привлечения. Соискатели работают как точка входа с высокой мотивацией прямо сейчас. После доказательства product-market fit — идём в enterprise: менеджеры, customer success и финансы с командной лицензией.
+    </div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 5</div>
+    <div class="slide-title">Портрет: начинающий специалист</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="label">Кто это</div>
+        <div class="body-text">22–28 лет. Первые 1–3 года в профессии. Работает в агентстве, стартапе или корпорации на позиции аккаунт-менеджера, сейлза, project manager, рекрутера, junior маркетолога или customer success. Может быть и начинающим тимлидом — тот, кого недавно повысили и кто впервые столкнулся с необходимостью управлять людьми.</div>
+        <div style="margin-top:1rem;">
+          <div class="label">Ситуация</div>
+          <div class="body-text">Каждый день — коммуникационный стресс: клиенты с претензиями, менеджеры с давлением, созвоны, где надо держать позицию. Человек, может, и знает правильный ответ теоретически — но в моменте теряется, после работы прокручивает разговор и думает «надо было сказать вот так».</div>
+        </div>
+        <div class="jtbd-box">
+          <div class="jtbd-label">Что он хочет</div>
+          <div class="jtbd-text">Чувствовать себя профессионально уверенным раньше, чем придёт настоящий опыт.</div>
+        </div>
+        <div class="why-box">
+          <div class="why-label">Почему не справляется сам</div>
+          <div class="why-text">Опыт приходит только через реальные ситуации. Просить совета у руководителя — страшно. Рилсы не дают практику. Коуч — слишком дорого.</div>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="label">Ключевые данные</div>
+        <div class="stat-block">
+          <div class="stat-num">№1</div>
+          <div class="stat-desc">Навык ведения переговоров — дефицит №1 среди бакалавров на первой работе</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-desc" style="font-size:13px; color: var(--color-text-secondary);">Soft skills называют чаще, чем практические навыки, при оценке готовности к работе</div>
+        </div>
+        <div style="margin-top:0.5rem;">
+          <div class="label">Ежедневный стресс</div>
+          <div class="tag-row">
+            <span class="tag">Клиенты</span>
+            <span class="tag">Руководители</span>
+            <span class="tag">Созвоны</span>
+            <span class="tag">Чаты</span>
+            <span class="tag">Фидбек</span>
+            <span class="tag">Дедлайны</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 6</div>
+    <div class="slide-title">Портрет: соискатель</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="label">Кто это</div>
+        <div class="body-text">20–35 лет. Ищет работу — первую или новую. Чаще всего белый воротничок: маркетолог, дизайнер, разработчик, менеджер. Особенно остро проблема стоит у зумеров и тех, кто давно не проходил интервью.</div>
+        <div style="margin-top:1rem;">
+          <div class="label">Ситуация</div>
+          <div class="body-text">Интервью — переговоры под давлением, где каждое слово оценивается, рекрутер может давить или задавать каверзные вопросы, а ставки высокие. Человек готовится, но в моменте может сбиться и поникнуть.</div>
+        </div>
+        <div class="jtbd-box">
+          <div class="jtbd-label">Что он хочет</div>
+          <div class="jtbd-text">Войти в комнату (в том числе виртуальную) и не потеряться.</div>
+        </div>
+        <div class="why-box">
+          <div class="why-label">Почему не справляется сам</div>
+          <div class="why-text">Интервью — редкое событие, потренироваться не на ком. Репетиция с другом не создаёт реального давления. Обратной связи после собеседований почти не дают.</div>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="label">Ключевые данные</div>
+        <div class="stat-block">
+          <div class="stat-num">93%</div>
+          <div class="stat-desc">кандидатов испытывают тревогу на собеседованиях</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">41%</div>
+          <div class="stat-desc">больше всего боятся не суметь ответить на сложный вопрос</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">30%</div>
+          <div class="stat-desc">зумеров привлекали родителя к первым переговорам о зарплате</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 7</div>
+    <div class="slide-title">Портрет: «Выживающий»</div>
+    <div class="slide-subtitle">«Я снова согласился — хотя понимал, что не надо»</div>
+    <div class="divider"></div>
+    <div class="two-col">
+      <div>
+        <div class="label">Кто это</div>
+        <div class="body-text">24–35 лет. Фрилансер, самозанятый или штатный сотрудник на client-facing роли в творческой или сервисной сфере: дизайнер, SMM-специалист, маркетолог, копирайтер, продюсер, видеограф. Работает напрямую с клиентами — внешними или внутренними.</div>
+        <div style="margin-top:1rem;">
+          <div class="label">Ситуация</div>
+          <div class="body-text">Клиенты давят на цену, меняют ТЗ без доплаты, общаются пассивно-агрессивно или просто грубо. Человек понимает, что его продавливают, но не знает, как ответить без потери клиента или конфликта. В итоге терпит и соглашается, а после разговора остаётся ощущение, что тебя использовали.<br><br>Если это офисный работник — ситуация та же, только вместо клиента — токсичный руководитель или коллега.</div>
+        </div>
+        <div class="jtbd-box">
+          <div class="jtbd-label">Что он хочет</div>
+          <div class="jtbd-text">Перестать чувствовать себя слабым и беспомощным.</div>
+        </div>
+        <div class="why-box">
+          <div class="why-label">Почему не справляется сам</div>
+          <div class="why-text">Страх потерять деньги или работу сильнее желания защитить себя. Не знает как сказать «нет», чтобы не обострить.</div>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="label">Ключевые данные</div>
+        <div class="stat-block">
+          <div class="stat-num">72%</div>
+          <div class="stat-desc">сотрудников российских компаний регулярно сталкиваются с деструктивным поведением руководства</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">43%</div>
+          <div class="stat-desc">фрилансеров — на пороге выгорания</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-desc" style="font-size:13px;">Главный триггер — давление клиентов и неумение выстраивать границы</div>
+        </div>
+        <div style="margin-top:0.5rem;">
+          <div class="label">Повторяющаяся боль</div>
+          <div class="tag-row">
+            <span class="tag">Созвоны</span>
+            <span class="tag">Правки</span>
+            <span class="tag">Дедлайны</span>
+            <span class="tag">Деньги</span>
+            <span class="tag">Давление</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 8</div>
+    <div class="slide-title">Что нужно исследовать дальше</div>
+    <div class="divider"></div>
+    <div class="intro-box">
+      Данные подтверждают что боль существует и она массовая. Следующий шаг — понять как именно она переживается, что человек уже пробовал и в какой момент он готов заплатить за решение.
+    </div>
+    <div class="three-col">
+      <div>
+        <div class="q-group">
+          <div class="q-group-title">Джуны и «выживающие»</div>
+          <div class="q-list">
+            <div class="q-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
+            <div class="q-item">Как они сейчас справляются?</div>
+            <div class="q-item">Есть ли стыд вокруг этой проблемы?</div>
+            <div class="q-item">За что они уже платят в контексте карьерного роста?</div>
+            <div class="q-item">Как они оценивают эти траты?</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="q-group">
+          <div class="q-group-title">Соискатели</div>
+          <div class="q-list">
+            <div class="q-item">Как они сейчас готовятся к интервью — и чего не хватает в этом процессе?</div>
+            <div class="q-item">Остаётся ли потребность в развитии коммуникативных навыков после трудоустройства?</div>
+            <div class="q-item">Насколько они готовы платить за подготовку к интервью vs бесплатные ресурсы?</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="q-group">
+          <div class="q-group-title">«Выживающие» отдельно</div>
+          <div class="q-list">
+            <div class="q-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
+            <div class="q-item">Что они уже пробовали чтобы решить проблему?</div>
+            <div class="q-item">Считают ли они что это про навык или «просто такой характер»?</div>
+            <div class="q-item">Насколько это актуальная проблема для других сфер жизни?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
