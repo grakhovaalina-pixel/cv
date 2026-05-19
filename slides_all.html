@@ -492,12 +492,150 @@
     line-height: 1.6;
     margin-bottom: 1.25rem;
   }
+
+  /* ── DIAGONAL TABLE HEADERS ── */
+  table.matrix th:not(.left-col) {
+    height: 90px;
+    vertical-align: bottom;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  table.matrix th:not(.left-col) span {
+    display: inline-block;
+    transform: rotate(-45deg);
+    transform-origin: left bottom;
+    white-space: nowrap;
+    font-size: 11px;
+    width: 1.2em;
+    margin-left: 1.2em;
+  }
+
+  /* ── SLIDE 8: SUMMARY ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 1.25rem;
+  }
+
+  .summary-thesis {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1.1rem 1.2rem;
+    border-left: 3px solid #1D9E75;
+  }
+
+  .summary-thesis-num {
+    font-size: 10px;
+    font-weight: 600;
+    color: #1D9E75;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.35rem;
+  }
+
+  .summary-thesis-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+
+  .summary-thesis-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .summary-note {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 1.1rem 1.2rem;
+    border-left: 3px solid var(--color-border-secondary);
+    margin-top: 0.5rem;
+  }
+
+  .summary-note-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.35rem;
+  }
+
+  .summary-note-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-note-text {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── MOBILE RESPONSIVE ── */
+  .cover {
+    max-width: 860px;
+    margin: 0 auto 1rem;
+    padding: 0 1rem;
+  }
+
+  .cover-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .cover-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .cover-sub {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .cover-title { font-size: 22px; }
+    body { padding: 1rem 0.5rem; }
+    .slide { padding: 1.25rem 1rem; }
+    .intro-stats, .stats-grid { grid-template-columns: 1fr !important; }
+    .sectors-grid { grid-template-columns: 1fr !important; }
+    .personas-grid { grid-template-columns: 1fr !important; }
+    .two-col { grid-template-columns: 1fr !important; }
+    .three-col { grid-template-columns: 1fr !important; }
+    .slide-title { font-size: 16px; }
+    table.matrix th:not(.left-col) { height: 80px; }
+    table.matrix th:not(.left-col) span { font-size: 10px; }
+    table.matrix th.left-col { width: 100px; font-size: 10px; }
+    table.matrix td.role { font-size: 11px; }
+  }
 </style>
 </head>
 <body>
+<div class="cover">
+  <div class="cover-label">Исследование рынка · 2025</div>
+  <div class="cover-title">Коммуникация как продукт:<br>куда идём и почему</div>
+  <div class="cover-sub">Анализ рабочей среды, целевых сегментов и стратегии запуска</div>
+</div>
 <div class="deck">
 
-  <!-- SLIDE 0 — INTRO -->
+  <!-- SLIDE 1 — INTRO -->
   <div class="slide slide-intro">
     <div class="slide-num">Слайд 1</div>
     <div class="slide-title">Почему рабочая коммуникация — это навык, а не характер</div>
@@ -530,8 +668,6 @@
       </div>
     </div>
   </div>
-
-
 
   <!-- SLIDE 2 -->
   <div class="slide">
@@ -701,10 +837,10 @@
         <thead>
           <tr>
             <th class="left-col">Роль ↓ / Сфера →</th>
-            <th>Маркетинг / PR</th>
-            <th>Продажи</th>
-            <th>Поддержка</th>
-            <th>Финансы</th>
+            <th><span>Маркетинг / PR</span></th>
+            <th><span>Продажи</span></th>
+            <th><span>Поддержка</span></th>
+            <th><span>Финансы</span></th>
           </tr>
         </thead>
         <tbody>
@@ -881,9 +1017,38 @@
     </div>
   </div>
 
-  <!-- SLIDE 8 -->
+  <!-- SLIDE 8 — SUMMARY -->
   <div class="slide">
     <div class="slide-num">Слайд 8</div>
+    <div class="slide-title">Резюме</div>
+    <div class="divider"></div>
+    <div class="summary-grid">
+      <div class="summary-thesis">
+        <div class="summary-thesis-num">Тезис 1</div>
+        <div class="summary-thesis-title">Идём в рабочую среду — это самая острая и монетизируемая боль: здесь коммуникационный провал стоит денег и карьеры, люди это чувствуют прямо сейчас и готовы платить за решение.</div>
+      </div>
+      <div class="summary-thesis">
+        <div class="summary-thesis-num">Тезис 2</div>
+        <div class="summary-thesis-title">Фокусируемся на маркетинге / PR, продажах, поддержке и финансах — там стресс структурный, а не случайный: сложные разговоры случаются каждый день, и платёжеспособная аудитория это хорошо понимает.</div>
+      </div>
+      <div class="summary-thesis">
+        <div class="summary-thesis-num">Тезис 3</div>
+        <div class="summary-thesis-title">Начинаем с джунов, фрилансеров и соискателей — они принимают решение сами, боль острая прямо сейчас, цикл сделки короткий; после PMF — выход в enterprise.</div>
+      </div>
+    </div>
+    <div class="summary-note">
+      <div class="summary-note-label">Другие ниши — следующий этап</div>
+      <div class="summary-note-title">B2B и межличностные отношения — возможно, но не сейчас</div>
+      <div class="summary-note-text">
+        <strong>B2B.</strong> Корпоративные лицензии — логичный шаг после PMF: выше чек, но длиннее цикл и нужны другие процессы продаж.<br><br>
+        <strong>Межличностные отношения.</strong> Технически продукт применим, но продавать сложнее: боль воспринимается как психологическая, человек с трудом признаёт, что нужна «тренировка». Это территория терапии — рынок с высоким доверием к людям и низким к технологиям. Стигма и размытая формулировка проблемы делают конверсию низкой даже при реальной боли. Возможно как эволюция — не как старт.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 -->
+  <div class="slide">
+    <div class="slide-num">Слайд 9</div>
     <div class="slide-title">Что нужно исследовать дальше</div>
     <div class="divider"></div>
     <div class="intro-box">
