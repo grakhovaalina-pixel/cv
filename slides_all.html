@@ -3,296 +3,376 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Коммуникация и стресс на работе</title>
+<title>ИИ-симулятор сложных разговоров</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap');
+
   :root {
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f5f5f5;
-    --color-text-primary: #111111;
-    --color-text-secondary: #555555;
-    --color-text-tertiary: #999999;
-    --color-border-tertiary: #e5e5e5;
-    --color-border-secondary: #cccccc;
-    --border-radius-lg: 12px;
-    --border-radius-md: 8px;
+    --bg: #f2f1ef;
+    --surface: #ffffff;
+    --surface-2: #f7f6f4;
+    --border: #e3e1dc;
+    --border-light: #eeece8;
+    --text-1: #111110;
+    --text-2: #5a5853;
+    --text-3: #9c9990;
+    --accent: #1a6b4a;
+    --accent-light: #e8f3ee;
+    --radius: 14px;
+    --radius-sm: 9px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #f0f0ef;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    padding: 2rem 1rem;
+    background: var(--bg);
+    font-family: 'Onest', -apple-system, sans-serif;
+    padding: 2rem 1rem 4rem;
+    color: var(--text-1);
   }
 
-  .deck { display: flex; flex-direction: column; gap: 2rem; max-width: 860px; margin: 0 auto; padding: 1rem 0; }
+  .deck {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 
-  /* ── SLIDE BASE ── */
+  /* ── SLIDE ── */
   .slide {
-    background: var(--color-background-primary);
-    border: 0.5px solid var(--color-border-tertiary);
-    border-radius: var(--border-radius-lg);
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
     padding: 2rem 2.25rem;
-    position: relative;
+  }
+
+  .slide-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
   }
 
   .slide-num {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--color-text-tertiary);
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
+  }
+
+  .slide-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-light);
+    border-radius: 20px;
+    padding: 2px 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .slide-title {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    line-height: 1.35;
+    color: var(--text-1);
+    margin-bottom: 0.5rem;
   }
 
-  .slide-body {
-    font-size: 14px;
-    color: var(--color-text-secondary);
+  .slide-intro {
+    font-size: 13.5px;
+    color: var(--text-2);
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
   .divider {
     height: 0.5px;
-    background: var(--color-border-tertiary);
+    background: var(--border-light);
     margin: 1.25rem 0;
   }
 
-  /* ── SLIDE 0 (INTRO) ── */
-  .slide-intro .intro-body {
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.8;
-  }
-
-  .slide-intro .intro-body p {
-    margin-bottom: 1rem;
-  }
-
-  .slide-intro .intro-body p:last-child {
-    margin-bottom: 0;
-  }
-
-  .intro-stats {
+  /* ── CARDS GRID ── */
+  .cards {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0,1fr));
     gap: 10px;
-    margin-top: 1.5rem;
   }
 
-  .intro-stat {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 1rem;
-  }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  .cards-4 { grid-template-columns: repeat(4, 1fr); }
 
-  .intro-stat-num {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 0.4rem;
-    line-height: 1.1;
-  }
-
-  .intro-stat-text {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    line-height: 1.45;
-    margin-bottom: 0.3rem;
-  }
-
-  .intro-stat-link {
-    display: block;
-    font-size: 10.5px;
-    color: var(--color-text-tertiary);
-    text-decoration: none;
-    word-break: break-word;
-    margin-top: 0.25rem;
-  }
-
-  .intro-stat-link:hover {
-    color: var(--color-text-secondary);
-    text-decoration: underline;
-  }
-
-  /* ── STATS GRID (slides 1–4) ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 1.25rem;
-  }
-
-  .stat-card {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 1rem;
-  }
-
-  .stat-number {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    line-height: 1.1;
-    margin-bottom: 0.4rem;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
-  }
-
-  .stat-source {
-    font-size: 11px;
-    color: var(--color-text-tertiary);
-    margin-top: 0.3rem;
-  }
-
-  /* ── SECTORS ── */
-  .sectors-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 1.25rem;
-  }
-
-  .sector-card {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
+  .card {
+    background: var(--surface-2);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-sm);
     padding: 1rem 1.1rem;
   }
 
-  .sector-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--color-text-primary);
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     margin-bottom: 0.4rem;
   }
 
-  .sector-text {
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-1);
+    margin-bottom: 0.35rem;
+    line-height: 1.35;
+  }
+
+  .card-text {
     font-size: 12.5px;
-    color: var(--color-text-secondary);
+    color: var(--text-2);
     line-height: 1.55;
   }
 
-  .sector-stat {
-    font-size: 12px;
+  .card-num {
+    font-size: 24px;
     font-weight: 500;
-    color: var(--color-text-primary);
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 0.5px solid var(--color-border-tertiary);
+    color: var(--text-1);
+    line-height: 1;
+    margin-bottom: 0.35rem;
   }
 
-  /* ── PERSONAS ── */
-  .personas-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 1.25rem;
+  .card-source {
+    font-size: 10.5px;
+    color: var(--text-3);
+    margin-top: 0.3rem;
   }
 
-  .persona-card {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
+  /* ── ACCENT CARD ── */
+  .card-accent {
+    background: var(--accent-light);
+    border-color: #b8daca;
+  }
+
+  .card-accent .card-label { color: var(--accent); }
+  .card-accent .card-num { color: var(--accent); }
+
+  /* ── CASE BOX ── */
+  .case-box {
+    background: var(--surface-2);
+    border-left: 2.5px solid var(--border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 0.85rem 1rem;
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin-top: 1rem;
   }
 
-  .persona-title {
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--color-text-primary);
+  .case-box strong { color: var(--text-1); font-weight: 500; }
+
+  .case-box-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     margin-bottom: 0.4rem;
   }
 
-  .persona-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    margin-bottom: 0.25rem;
+  /* ── WARNING BOX ── */
+  .warn-box {
+    background: #fdf5f0;
+    border-left: 2.5px solid #d4824a;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.85rem 1rem;
+    font-size: 12.5px;
+    color: #6b3d1e;
+    line-height: 1.6;
+    margin-top: 1rem;
   }
 
-  .persona-label {
-    font-size: 10.5px;
-    font-weight: 500;
-    color: var(--color-text-tertiary);
+  .warn-box strong { color: #3d1e0a; font-weight: 500; }
+
+  .warn-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #d4824a;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    min-width: 40px;
-    padding-top: 1px;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── PROS/CONS ── */
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pc-block { display: flex; flex-direction: column; gap: 5px; }
+
+  .pc-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .pc-title.pro { color: var(--accent); }
+  .pc-title.con { color: #c0602a; }
+
+  .pc-item {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.5;
+    padding-left: 0.8rem;
+    position: relative;
+  }
+
+  .pc-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-3);
+    font-size: 11px;
+  }
+
+  /* ── PERSONA CARD ── */
+  .persona-card {
+    background: var(--surface-2);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+  }
+
+  .persona-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-1);
+    margin-bottom: 0.75rem;
+  }
+
+  .p-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0.4rem;
+    align-items: flex-start;
+  }
+
+  .p-key {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 52px;
     flex-shrink: 0;
+    padding-top: 1px;
   }
 
-  .persona-value {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    line-height: 1.45;
+  .p-val {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.5;
   }
 
-  .pain-dots { display: flex; gap: 3px; align-items: center; }
-
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-border-secondary);
+  .jtbd {
+    border-left: 2px solid var(--accent);
+    padding-left: 0.75rem;
+    margin-top: 0.6rem;
   }
 
-  .dot.filled { background: var(--color-text-primary); }
-
-  /* ── TABLE ── */
-  .table-wrap {
-    margin-top: 1.25rem;
-    overflow-x: auto;
+  .jtbd-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.15rem;
   }
+
+  .jtbd-text {
+    font-size: 12.5px;
+    color: var(--text-1);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.5rem; }
+
+  .tag {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 11.5px;
+    color: var(--text-2);
+  }
+
+  .tag.green {
+    background: var(--accent-light);
+    border-color: #b8daca;
+    color: var(--accent);
+  }
+
+  .tag.red {
+    background: #fdf5f0;
+    border-color: #f0c5a8;
+    color: #c0602a;
+  }
+
+  /* ── VALIDATION NOTE ── */
+  .validation-note {
+    font-size: 11.5px;
+    color: var(--text-3);
+    font-style: italic;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 0.5px solid var(--border-light);
+  }
+
+  /* ── MATRIX TABLE ── */
+  .matrix-wrap { margin-top: 1.25rem; overflow-x: auto; }
 
   table.matrix {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
-    table-layout: fixed;
   }
 
   table.matrix th {
     font-size: 11px;
     font-weight: 500;
-    color: var(--color-text-secondary);
+    color: var(--text-3);
     text-align: center;
-    padding: 0.4rem 0.5rem;
-    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 0.4rem 0.6rem;
+    border-bottom: 0.5px solid var(--border);
   }
 
-  table.matrix th.left-col { text-align: left; width: 130px; }
+  table.matrix th:first-child { text-align: left; }
 
   table.matrix td {
     text-align: center;
-    padding: 0.45rem 0.5rem;
-    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 0.45rem 0.6rem;
+    border-bottom: 0.5px solid var(--border-light);
     font-size: 13px;
     font-weight: 500;
   }
 
-  table.matrix td.role {
+  table.matrix td:first-child {
     text-align: left;
-    color: var(--color-text-secondary);
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 400;
+    color: var(--text-2);
   }
 
-  table.matrix td.p3 { color: #1D9E75; }
-  table.matrix td.p2 { color: var(--color-text-secondary); }
-  table.matrix td.p1 { color: var(--color-text-tertiary); }
+  .p-high { color: var(--accent); }
+  .p-mid { color: var(--text-2); }
+  .p-low { color: var(--text-3); }
 
-  .priority-key {
+  .matrix-key {
     display: flex;
     gap: 1.25rem;
     margin-top: 0.75rem;
@@ -304,788 +384,859 @@
     align-items: center;
     gap: 5px;
     font-size: 11.5px;
-    color: var(--color-text-secondary);
+    color: var(--text-2);
   }
 
   .key-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
   }
 
-  .rec-box {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
+  /* ── FUNNEL ── */
+  .funnel { display: flex; flex-direction: column; gap: 8px; margin-top: 1.25rem; }
+
+  .funnel-stage {
+    border-radius: var(--radius-sm);
     padding: 0.9rem 1.1rem;
-    margin-top: 1.25rem;
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    border-left: 2.5px solid #1D9E75;
+    border: 0.5px solid var(--border-light);
   }
 
-  .rec-box strong {
-    color: var(--color-text-primary);
-    font-weight: 500;
-  }
+  .funnel-stage-1 { background: #f0f7f3; border-color: #c5dfd0; }
+  .funnel-stage-2 { background: var(--surface-2); }
+  .funnel-stage-3 { background: var(--surface-2); }
 
-  /* ── SLIDES 5–8 ── */
-  .slide-subtitle {
-    font-size: 13px;
-    color: var(--color-text-tertiary);
-    margin-bottom: 1.25rem;
-    font-style: italic;
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr);
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  .label {
-    font-size: 10.5px;
-    font-weight: 500;
-    color: var(--color-text-tertiary);
+  .funnel-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
     margin-bottom: 0.35rem;
   }
 
-  .body-text {
-    font-size: 13.5px;
-    color: var(--color-text-secondary);
-    line-height: 1.65;
-  }
+  .funnel-stage-1 .funnel-label { color: var(--accent); }
+  .funnel-stage-2 .funnel-label { color: var(--text-2); }
+  .funnel-stage-3 .funnel-label { color: var(--text-3); }
 
-  .tag-row {
+  .funnel-items {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 0.5rem;
   }
 
-  .tag {
-    background: var(--color-background-secondary);
-    border: 0.5px solid var(--color-border-tertiary);
+  .funnel-item {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-1);
+    background: var(--surface);
+    border: 0.5px solid var(--border);
     border-radius: 20px;
-    padding: 3px 10px;
+    padding: 3px 11px;
+  }
+
+  .funnel-desc {
     font-size: 12px;
-    color: var(--color-text-secondary);
+    color: var(--text-3);
+    margin-top: 0.4rem;
   }
 
-  .stat-block {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 1rem;
+  /* ── SUMMARY ── */
+  .theses { display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; }
+
+  .thesis {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-light);
+    align-items: flex-start;
   }
 
-  .stat-num {
-    font-size: 24px;
+  .thesis-num {
+    font-size: 18px;
     font-weight: 500;
-    color: var(--color-text-primary);
-    line-height: 1.1;
-    margin-bottom: 0.3rem;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 1.5rem;
+    flex-shrink: 0;
+    padding-top: 1px;
   }
 
-  .stat-desc {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    line-height: 1.45;
+  .thesis-text {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.6;
   }
 
-  .stat-source-small {
-    font-size: 11px;
-    color: var(--color-text-tertiary);
-    margin-top: 0.3rem;
-  }
+  /* ── RESEARCH ── */
+  .research-groups { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
 
-  .stats-col { display: flex; flex-direction: column; gap: 10px; }
-
-  .jtbd-box {
-    border-left: 2.5px solid #1D9E75;
-    padding-left: 0.85rem;
-    margin-top: 0.75rem;
-  }
-
-  .jtbd-label {
-    font-size: 10.5px;
-    font-weight: 500;
-    color: #1D9E75;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 0.2rem;
-  }
-
-  .jtbd-text {
-    font-size: 13px;
-    color: var(--color-text-primary);
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  .why-box {
-    border-left: 2.5px solid var(--color-border-secondary);
-    padding-left: 0.85rem;
-    margin-top: 0.75rem;
-  }
-
-  .why-label {
-    font-size: 10.5px;
-    font-weight: 500;
-    color: var(--color-text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 0.2rem;
-  }
-
-  .why-text {
-    font-size: 12.5px;
-    color: var(--color-text-secondary);
-    line-height: 1.5;
-  }
-
-  .three-col {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: 10px;
-    margin-top: 1rem;
-  }
-
-  .q-group { margin-bottom: 1rem; }
-
-  .q-group-title {
+  .rg-title {
     font-size: 13px;
     font-weight: 500;
-    color: var(--color-text-primary);
+    color: var(--text-1);
     margin-bottom: 0.5rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding-bottom: 0.35rem;
+    border-bottom: 0.5px solid var(--border-light);
   }
 
-  .q-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .rg-items { display: flex; flex-direction: column; gap: 0.3rem; }
 
-  .q-item {
+  .rg-item {
     font-size: 12.5px;
-    color: var(--color-text-secondary);
+    color: var(--text-2);
     line-height: 1.5;
-    padding-left: 0.75rem;
+    padding-left: 0.85rem;
     position: relative;
   }
 
-  .q-item::before {
+  .rg-item::before {
     content: '—';
     position: absolute;
     left: 0;
-    color: var(--color-text-tertiary);
-    font-size: 11px;
+    color: var(--text-3);
   }
 
-  .intro-box {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 0.85rem 1rem;
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-  }
-
-  /* ── DIAGONAL TABLE HEADERS ── */
-  table.matrix th:not(.left-col) {
-    height: 90px;
-    vertical-align: bottom;
-    padding-bottom: 0.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  table.matrix th:not(.left-col) span {
-    display: inline-block;
-    transform: rotate(-45deg);
-    transform-origin: left bottom;
-    white-space: nowrap;
-    font-size: 11px;
-    width: 1.2em;
-    margin-left: 1.2em;
-  }
-
-  /* ── SLIDE 8: SUMMARY ── */
-  .summary-grid {
+  /* ── THREE COL GRID ── */
+  .three-col-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 1.25rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
 
-  .summary-thesis {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 1.1rem 1.2rem;
-    border-left: 3px solid #1D9E75;
-  }
-
-  .summary-thesis-num {
-    font-size: 10px;
-    font-weight: 600;
-    color: #1D9E75;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.35rem;
-  }
-
-  .summary-thesis-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
-    line-height: 1.35;
-  }
-
-  .summary-thesis-text {
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  .summary-note {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 1.1rem 1.2rem;
-    border-left: 3px solid var(--color-border-secondary);
-    margin-top: 0.5rem;
-  }
-
-  .summary-note-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--color-text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.35rem;
-  }
-
-  .summary-note-title {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .summary-note-text {
-    font-size: 12.5px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  /* ── MOBILE RESPONSIVE ── */
-  .cover {
-    max-width: 860px;
-    margin: 0 auto 1rem;
-    padding: 0 1rem;
-  }
-
-  .cover-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--color-text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-  }
-
-  .cover-title {
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-  }
-
-  .cover-sub {
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
+  /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
-    .cover-title { font-size: 22px; }
-    body { padding: 1rem 0.5rem; }
-    .slide { padding: 1.25rem 1rem; }
-    .intro-stats, .stats-grid { grid-template-columns: 1fr !important; }
-    .sectors-grid { grid-template-columns: 1fr !important; }
-    .personas-grid { grid-template-columns: 1fr !important; }
-    .two-col { grid-template-columns: 1fr !important; }
-    .three-col { grid-template-columns: 1fr !important; }
+    body { padding: 1rem 0.75rem 3rem; }
+    .slide { padding: 1.5rem 1.25rem; }
+    .cards-2, .cards-3, .cards-4, .three-col-grid { grid-template-columns: 1fr; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .p-key { min-width: 48px; }
     .slide-title { font-size: 16px; }
-    table.matrix th:not(.left-col) { height: 80px; }
-    table.matrix th:not(.left-col) span { font-size: 10px; }
-    table.matrix th.left-col { width: 100px; font-size: 10px; }
-    table.matrix td.role { font-size: 11px; }
+    table.matrix { font-size: 11.5px; }
+    table.matrix th, table.matrix td { padding: 0.35rem 0.4rem; }
   }
 </style>
 </head>
 <body>
-<div class="cover">
-  <div class="cover-label">Исследование рынка · 2025</div>
-  <div class="cover-title">Коммуникация как продукт:<br>куда идём и почему</div>
-  <div class="cover-sub">Анализ рабочей среды, целевых сегментов и стратегии запуска</div>
-</div>
 <div class="deck">
 
-  <!-- SLIDE 1 — INTRO -->
-  <div class="slide slide-intro">
-    <div class="slide-num">Слайд 1</div>
-    <div class="slide-title">Почему рабочая коммуникация — это навык, а не характер</div>
+  <!-- SLIDE 1 -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">01</span>
+    </div>
+    <div class="slide-title">Какие целевые аудитории наиболее заинтересованы в ИИ-симуляторе сложных разговоров?</div>
+  </div>
+
+  <!-- SLIDE 2 — Карьерные коммуникации -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">02</span>
+      <span class="slide-tag">Аудитория</span>
+    </div>
+    <div class="slide-title">Карьерные коммуникации</div>
+
+    <div class="cards cards-2">
+      <div class="card card-accent">
+        <div class="card-label">Рынок</div>
+        <div class="card-num">2,2 млрд ₽</div>
+        <div class="card-text">Рынок soft skills EdTech в 2024 году, рост +16%. Прогноз на 2025 — +15–25%</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Уникальность</div>
+        <div class="card-text">Конкуренты почти не предлагают симуляцию <strong>эмоционального давления</strong> — именно это делает продукт уникальным</div>
+      </div>
+    </div>
+
     <div class="divider"></div>
-    <div class="intro-body">
-      <p>Сегодня почти любая профессия строится на взаимодействии с людьми — и коммуникативность из абстрактного пункта в резюме превратилась в базовое требование к специалисту. Не уметь держать позицию на встрече, объяснять свою точку зрения, работать с возражениями — это уже не личная особенность характера, а профессиональный пробел, от которого может страдать и команда, и компания.</p>
-      <p>Но есть и вторая сторона: от провалов в профессиональных ситуациях страдает и сам исполнитель. Работа определяет, кем мы себя считаем, какую жизнь ведём, где живём, что можем себе позволить. Неудачный разговор с руководителем или клиентом — это уже не просто неловкость, а потенциальный удар по уровню жизни и психологическому благополучию. Из-за этого страха ошибки даже сильные специалисты могут теряться под давлением, избегать сложных разговоров или часами прокручивают их после.</p>
-      <p>Говорить уверенно, держать позицию, выходить из напряжённых ситуаций без потерь — эти навыки важны в любой сфере жизни. Но нигде они не конвертируются так быстро и так ощутимо, как здесь.</p>
+
+    <div class="three-col-grid">
+      <div class="pc-block">
+        <div class="pc-title pro">Почему идти</div>
+        <div class="pc-item">Самая высокая стоимость ошибки</div>
+        <div class="pc-item">Люди уже платят за карьерный рост</div>
+        <div class="pc-item">Боль повторяется регулярно</div>
+        <div class="pc-item">Проще объяснить ценность продукта</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title" style="color:var(--text-3)">Конкуренты</div>
+        <div class="pc-item">Книги и курсы</div>
+        <div class="pc-item">Корпоративное обучение</div>
+        <div class="pc-item">Ролики в соцсетях</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы</div>
+        <div class="pc-item">Высокая конкуренция в смежных нишах</div>
+      </div>
     </div>
-    <div class="intro-stats">
-      <div class="intro-stat">
-        <div class="intro-stat-num">№1</div>
-        <div class="intro-stat-text">Коммуникация — навык №1 по версии LinkedIn, среди миллиарда пользователей и миллионов вакансий</div>
-        <a class="intro-stat-link" href="https://www.linkedin.com/business/talent/blog/talent-strategy/linkedin-most-in-demand-hard-and-soft-skills" target="_blank">linkedin.com</a>
+
+    <div class="case-box">
+      <div class="case-box-label">Кейс</div>
+      <strong>Dailo</strong> — B2B, речевые тренажёры для фронт-линии. Рост выручки ×6,5 за 2 года.
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — Дейтинг -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">03</span>
+      <span class="slide-tag">Аудитория</span>
+    </div>
+    <div class="slide-title">Дейтинг и романтические отношения</div>
+
+    <div class="cards cards-2">
+      <div class="card card-accent">
+        <div class="card-label">Рынок онлайн-знакомств (РФ)</div>
+        <div class="card-num">$52,6 млн</div>
+        <div class="card-text">Годовая выручка в 2024. Прогноз к 2029 — $64,2 млн</div>
       </div>
-      <div class="intro-stat">
-        <div class="intro-stat-num">22%</div>
-        <div class="intro-stat-text">россиян называют работу главным источником стресса в жизни</div>
-        <a class="intro-stat-link" href="https://www.vedomosti.ru/society/news/2022/07/25/932842-vtsiom-rossiyane" target="_blank">vedomosti.ru</a>
+      <div class="card">
+        <div class="card-label">Потенциал</div>
+        <div class="card-text">Рынок есть, но люди скорее хотят виртуального партнёра, а не тренировку навыков</div>
       </div>
-      <div class="intro-stat">
-        <div class="intro-stat-num">61%</div>
-        <div class="intro-stat-text">сотрудников прокручивают неприятные рабочие разговоры уже после работы</div>
-        <a class="intro-stat-link" href="https://www.itpro.com/software/business-apps/watch-your-tone-at-work-atlassian-warns-poor-communication-and-blunt-messages-are-confusing-colleagues-and-its-having-a-serious-impact-on-productivity" target="_blank">itpro.com</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="three-col-grid">
+      <div class="pc-block">
+        <div class="pc-title pro">Почему идти</div>
+        <div class="pc-item">Коммуникативная тревога в романтических ситуациях — одна из самых острых</div>
+        <div class="pc-item">Отношения — в топе по важности сфера жизни</div>
+        <div class="pc-item">Высокий потенциал удержания: боль возвращается</div>
       </div>
-      <div class="intro-stat">
-        <div class="intro-stat-num">42%</div>
-        <div class="intro-stat-text">испытывают стресс при попытке выбрать правильный тон в ответе</div>
-        <a class="intro-stat-link" href="https://www.forbes.com/advisor/business/digital-communication-workplace/" target="_blank">forbes.com</a>
+      <div class="pc-block">
+        <div class="pc-title" style="color:var(--text-3)">Конкуренты</div>
+        <div class="pc-item">Психологи и коучи</div>
+        <div class="pc-item">Книги по отношениям</div>
+        <div class="pc-item">Соцсети и YouTube</div>
+        <div class="pc-item">ChatGPT (неструктурированно)</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы</div>
+        <div class="pc-item">Территория терапии — высокая стигма</div>
+        <div class="pc-item">«Неестественность» процесса тренировки</div>
+        <div class="pc-item">Сложный и дорогой маркетинг</div>
+        <div class="pc-item">Непредсказуемая реакция рынка</div>
+      </div>
+    </div>
+
+    <div class="case-box">
+      <div class="case-box-label">Кейс — предупреждение</div>
+      Айтишник написал бота на GPT, который год вёл переписки в Tinder и нашёл невесту среди 5240 анкет. Пост набрал <strong>3,5 млн просмотров</strong> — но реакция была негативной: жалели девушек, не восхищались продуктом. Никто не превратил это в бизнес.
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — Ментальное здоровье -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">04</span>
+      <span class="slide-tag">Аудитория</span>
+    </div>
+    <div class="slide-title">Ментальное здоровье и терапия</div>
+
+    <div class="cards cards-2">
+      <div class="card card-accent">
+        <div class="card-label">Рынок психотерапевтических услуг (РФ)</div>
+        <div class="card-num">20,5 млрд ₽</div>
+        <div class="card-text">Рост +18,5% за год. Данные 2025 г.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Позиционирование</div>
+        <div class="card-text">ИИ-конкуренты работают в режиме поддержки. Никто не предлагает <strong>симуляцию реального сложного разговора</strong> с другим человеком</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="three-col-grid">
+      <div class="pc-block">
+        <div class="pc-title pro">Почему идти</div>
+        <div class="pc-item">Влияет на все сферы жизни</div>
+        <div class="pc-item">Стигма снижается, осведомлённость растёт</div>
+        <div class="pc-item">Большой и быстрорастущий рынок</div>
+        <div class="pc-item">Нет прямых конкурентов с практикой разговоров</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title" style="color:var(--text-3)">Конкуренты</div>
+        <div class="pc-item">Психологи и терапевты</div>
+        <div class="pc-item">Книги и самопомощь</div>
+        <div class="pc-item">ChatGPT (неструктурированно)</div>
+        <div class="pc-item">Просто, Практика</div>
+        <div class="pc-item">ИИ: Фрейдли, Лея</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы</div>
+        <div class="pc-item">Нужна клиническая валидация или партнёрство с терапевтами</div>
+        <div class="pc-item">Высокий порог доверия к продукту</div>
+        <div class="pc-item">Регуляторные риски при выходе за рубеж</div>
+        <div class="pc-item">Сложное позиционирование: «не терапия, а тренировка»</div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ Регуляторный прецедент</div>
+      14-летний Сьюэлл Сетцер развил эмоциональную связь с ботом Character.AI и погиб в феврале 2024 года. В январе 2026 года дело урегулировано мировым соглашением — <strong>первый в истории прецедент</strong> иска о смерти, связанной с ИИ-чатботом. OpenAI и Meta столкнулись с аналогичными исками.
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — Почему работа первая -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">05</span>
+    </div>
+    <div class="slide-title">Почему идём в рабочую среду первыми</div>
+    <p class="slide-intro">Рабочая среда — точка, где коммуникационные навыки быстрее всего конвертируются в деньги, статус и психологическое благополучие.</p>
+
+    <div class="pc-block" style="margin-bottom:1.25rem">
+      <div class="pc-item">Стресс повторяется регулярно</div>
+      <div class="pc-item">Люди уже готовы платить за карьерный рост</div>
+      <div class="pc-item">Компании инвестируют в soft skills</div>
+      <div class="pc-item">Понятный ROI для B2B</div>
+      <div class="pc-item">Ниша понятная и предсказуемая</div>
+    </div>
+
+    <div class="cards cards-4">
+      <div class="card card-accent">
+        <div class="card-num">#1</div>
+        <div class="card-text">Навык по версии LinkedIn среди миллиарда пользователей</div>
+      </div>
+      <div class="card">
+        <div class="card-num">22%</div>
+        <div class="card-text">Россиян называют работу главным источником стресса</div>
+      </div>
+      <div class="card">
+        <div class="card-num">61%</div>
+        <div class="card-text">Сотрудников прокручивают рабочие разговоры после работы</div>
+      </div>
+      <div class="card">
+        <div class="card-num">42%</div>
+        <div class="card-text">Испытывают стресс при выборе тона в рабочем сообщении</div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 2 -->
+  <!-- SLIDE 6 — Где стресс острее всего -->
   <div class="slide">
-    <div class="slide-num">Слайд 2</div>
+    <div class="slide-meta">
+      <span class="slide-num">06</span>
+    </div>
     <div class="slide-title">Где коммуникационный стресс острее всего</div>
-    <div class="slide-body">
-      Не все профессии одинаково уязвимы. Там, где результат зависит от переговоров, защиты позиции или работы с негативом — коммуникационная нагрузка максимальна.
-    </div>
-    <div class="sectors-grid">
-      <div class="sector-card">
-        <div class="sector-title">Маркетинг / PR / реклама / креатив</div>
-        <div class="sector-text">Одна из самых эмоционально нестабильных отраслей: постоянное согласование с клиентами, защита идей, отстаивание бюджетов. Специалисты регулярно оказываются между творческой позицией и давлением заказчика.</div>
-        <div class="sector-stat">Каждый второй специалист сталкивается с выгоранием — особенно рекламщики, PR и SMM (RB.ru)</div>
+
+    <div class="cards cards-3">
+      <div class="card">
+        <div class="card-label">Маркетинг / PR / реклама</div>
+        <div class="card-title">Постоянное давление заказчика</div>
+        <div class="card-text">Одна из самых эмоционально нестабильных отраслей: согласование с клиентами, защита идей, отстаивание бюджетов.</div>
+        <div class="divider"></div>
+        <div class="card-text"><strong>Каждый второй</strong> специалист сталкивается с выгоранием — особенно рекламщики, PR и SMM</div>
+        <div class="card-source">RB.ru</div>
       </div>
-      <div class="sector-card">
-        <div class="sector-title">Продажи</div>
-        <div class="sector-text">Специалисты по продажам — под давлением плана, клиентов и менеджеров одновременно. Каждый разговор — это переговоры с реальными ставками: отказ, скидка, срыв сделки.</div>
-        <div class="sector-stat">39% работодателей считают продажников наиболее подверженными выгоранию — 1-е место (hh.ru + AIBY)</div>
+      <div class="card">
+        <div class="card-label">Продажи</div>
+        <div class="card-title">Каждый разговор — переговоры</div>
+        <div class="card-text">Давление плана, клиентов и менеджеров одновременно. Каждый звонок несёт реальный риск: отказ, скидка, срыв сделки.</div>
+        <div class="divider"></div>
+        <div class="card-text"><strong>39%</strong> работодателей считают продажников наиболее подверженными выгоранию — 1-е место</div>
+        <div class="card-source">hh.ru + AIBY</div>
       </div>
-      <div class="sector-card">
-        <div class="sector-title">Сервис и поддержка</div>
-        <div class="sector-text">Наиболее токсичная по коммуникационной нагрузке среда: постоянный поток агрессивных и фрустрированных клиентов, плюс внутренние конфликты в команде. Стресс здесь структурный, а не ситуативный.</div>
-        <div class="sector-stat">87% работников колл-центров — высокий уровень стресса; выгорание в 2025 году достигло 66% (Cornell / HubSpot)</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-title">Финансы</div>
-        <div class="sector-text">Высокие ставки в каждом разговоре: переговоры с инвесторами, клиентами, регуляторами. Ошибка в коммуникации — репутационный и финансовый риск. Отрасль входит в топ-5 самых стрессовых в мире.</div>
-        <div class="sector-stat">67% работников финансового сектора сообщают о стрессе на работе (Spill / британские данные)</div>
+      <div class="card">
+        <div class="card-label">Финансы</div>
+        <div class="card-title">Высокие ставки в каждом слове</div>
+        <div class="card-text">Переговоры с инвесторами, клиентами, регуляторами. Ошибка в коммуникации — репутационный и финансовый риск.</div>
+        <div class="divider"></div>
+        <div class="card-text"><strong>67%</strong> работников финансового сектора сообщают о стрессе на работе</div>
+        <div class="card-source">Spill, британские данные</div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 3 -->
+  <!-- SLIDE 7 — Джун -->
   <div class="slide">
-    <div class="slide-num">Слайд 3</div>
-    <div class="slide-title">Кто испытывает эту боль</div>
-    <div class="slide-body">
-      Шесть профилей, у каждого — своя точка боли и своя цель в переговорах.
+    <div class="slide-meta">
+      <span class="slide-num">07</span>
+      <span class="slide-tag">Портрет ЦА · 1/6</span>
     </div>
-    <div class="personas-grid">
-      <div class="persona-card">
-        <div class="persona-title">Джун в продажах / менеджменте</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">Теряется под давлением, боится сложных разговоров, после созвона прокручивает «надо было сказать иначе»</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Чувствовать себя профессионально уверенным — прямо сейчас, не через 5 лет</div>
-        </div>
+    <div class="slide-title">Джун в продажах / менеджменте</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">Теряется под давлением, избегает сложных разговоров, после созвонов прокручивает диалог — «надо было ответить иначе»</div>
       </div>
-      <div class="persona-card">
-        <div class="persona-title">Соискатель</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">Теряется на интервью, паникует под давлением, не знает как ответить на каверзный вопрос</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Войти в переговорную комнату и не потеряться</div>
-        </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Высокая. Стрессовые коммуникации происходят почти ежедневно</div>
       </div>
-      <div class="persona-card">
-        <div class="persona-title">Фрилансер / client-facing специалист</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">Токсичные клиенты, неумение держать границы, соглашается — хотя понимает, что не стоило</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Перестать чувствовать себя слабым и продавленным</div>
-        </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Короткий. Решение эмоциональное и импульсивное</div>
       </div>
-      <div class="persona-card">
-        <div class="persona-title">Менеджер / новый тимлид</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">После повышения столкнулся с необходимостью давать фидбек, управлять конфликтами, иногда увольнять</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Вести сложные разговоры без потери авторитета</div>
-        </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Позитивное отношение</div>
       </div>
-      <div class="persona-card">
-        <div class="persona-title">Топ-менеджер / основатель</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">Давление инвесторов, переговоры с высокими ставками, управление репутацией и конфликтами в команде</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Управлять любой переговорной ситуацией с позиции силы</div>
-        </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Средняя. Чек ограничен, но психологическая мотивация высокая</div>
       </div>
-      <div class="persona-card">
-        <div class="persona-title">Customer support / success</div>
-        <div class="persona-row">
-          <div class="persona-label">Боль</div>
-          <div class="persona-value">Ежедневный поток агрессии, невозможность де-эскалировать, эмоциональное выгорание</div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Острота</div>
-          <div class="persona-value">
-            <div class="pain-dots">
-              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="persona-row">
-          <div class="persona-label">Цель</div>
-          <div class="persona-value">Выходить из сложных разговоров с клиентами без внутреннего надлома</div>
-        </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу научиться звучать уверенно раньше, чем ко мне придёт настоящий опыт»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Легко таргетировать</div>
+        <div class="pc-item">Быстро собрать обратную связь</div>
+        <div class="pc-item">Высокий потенциал «сарафана»</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Низкий LTV</div>
+        <div class="pc-item">Сложно продавать дорогую подписку</div>
+      </div>
+    </div>
+
+    <div class="validation-note">* Этот и дальнейшие портреты требуют валидации через исследования аудитории</div>
+  </div>
+
+  <!-- SLIDE 8 — Соискатель -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">08</span>
+      <span class="slide-tag">Портрет ЦА · 2/6</span>
+    </div>
+    <div class="slide-title">Соискатель</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">Теряется на интервью, боится давления и неожиданных вопросов, не умеет «продавать себя» в моменте</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Низкая, но с очень высокой интенсивностью в период поиска работы</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Очень короткий. Высокая мотивация и срочность</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Позитивное, особенно у «белых воротничков»</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Высокая в моменте</div>
+      </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу зайти на интервью и не рассыпаться под давлением»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Самая понятная коммуникация ценности</div>
+        <div class="pc-item">Дешёвый вход через трафик</div>
+        <div class="pc-item">Высокий эмоциональный триггер</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Слабый retention после трудоустройства</div>
+        <div class="pc-item">Но: потенциал перехода в другую категорию</div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 4 -->
+  <!-- SLIDE 9 — Фрилансер -->
   <div class="slide">
-    <div class="slide-num">Слайд 4</div>
+    <div class="slide-meta">
+      <span class="slide-num">09</span>
+      <span class="slide-tag">Портрет ЦА · 3/6</span>
+    </div>
+    <div class="slide-title">Фрилансер / «выживающий»</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">Не умеет держать границы, боится потерять клиента, соглашается на невыгодные условия и терпит токсичное общение</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Очень высокая. Коммуникационный стресс встроен в ежедневную работу</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Короткий. Проблема напрямую связана с деньгами и самооценкой</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Высокое доверие среди digital / творческих профессий</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Средне-высокая, особенно если продукт помогает «не терять деньги в разговорах»</div>
+      </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу перестать чувствовать себя продавленным в разговорах с клиентами»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Сильная эмоциональная боль</div>
+        <div class="pc-item">Хорошая органика через кейсы</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Фрагментированный рынок (много «под-ЦА»)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 — Менеджер -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">10</span>
+      <span class="slide-tag">Портрет ЦА · 4/6</span>
+    </div>
+    <div class="slide-title">Менеджер / новый тимлид</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">После повышения впервые сталкивается с необходимостью управлять конфликтами, давать негативный фидбек и увольнять людей</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Высокая. Сложные разговоры становятся частью новой роли</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Средний. Часто решение принимается через HR или работодателя</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Сдержанное. Важно ощущение «профессионального инструмента», а не игрушки</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Средняя лично, высокая через корпоративный бюджет</div>
+      </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу вести тяжёлые разговоры без ощущения, что теряю контроль или авторитет»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Высокий LTV</div>
+        <div class="pc-item">Командные лицензии</div>
+        <div class="pc-item">Регулярное использование</div>
+        <div class="pc-item">Хороший B2B потенциал</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Длиннее цикл продаж</div>
+        <div class="pc-item">Нужен зрелый продукт</div>
+        <div class="pc-item">Выше требования к качеству сценариев</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 — Customer success -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">11</span>
+      <span class="slide-tag">Портрет ЦА · 5/6</span>
+    </div>
+    <div class="slide-title">Customer success / account management</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">Постоянная деэскалация конфликтов, удержание сложных клиентов и эмоциональное выгорание от напряжённых коммуникаций</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Очень высокая. Конфликтные разговоры — часть ежедневной работы</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Средний или длинный. Чаще покупает компания, а не сотрудник</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Позитивное. Аудитория уже работает с AI в ежедневных процессах</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Высокая через работодателя, особенно в B2B IT / SaaS</div>
+      </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу уметь удерживать клиента и гасить напряжение без эмоционального истощения»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Сильная повторяемость сценариев</div>
+        <div class="pc-item">Понятный ROI для бизнеса</div>
+        <div class="pc-item">Высокий B2B потенциал, командные лицензии</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Длиннее внедрение</div>
+        <div class="pc-item">Требуется кастомизация сценариев под индустрию</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12 — Топ-менеджер -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">12</span>
+      <span class="slide-tag">Портрет ЦА · 6/6</span>
+    </div>
+    <div class="slide-title">Топ-менеджер / основатель</div>
+
+    <div class="persona-card">
+
+      <div class="p-row">
+        <div class="p-key">Боль</div>
+        <div class="p-val">Высокие ставки коммуникации: инвесторы, партнёры, кризисы, внутренние конфликты и репутационные риски</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Частота</div>
+        <div class="p-val">Средняя, но цена ошибки очень высокая</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Цикл</div>
+        <div class="p-val">Длинный. Требуется доверие, репутация и персональный подход</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">AI</div>
+        <div class="p-val">Осторожное. AI воспринимается скорее как вспомогательный инструмент, не тренер</div>
+      </div>
+      <div class="p-row">
+        <div class="p-key">Оплата</div>
+        <div class="p-val">Очень высокая — если продукт выглядит как эксклюзивный инструмент</div>
+      </div>
+
+      <div class="jtbd" style="margin-top:1.1rem">
+        <div class="jtbd-label">User story</div>
+        <div class="jtbd-text">«Я хочу сохранять контроль и репутацию в любой ситуации»</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pros-cons">
+      <div class="pc-block">
+        <div class="pc-title pro">Плюсы сегмента</div>
+        <div class="pc-item">Высокий чек</div>
+        <div class="pc-item">Высокий престиж</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-title con">Минусы сегмента</div>
+        <div class="pc-item">Сложный доступ</div>
+        <div class="pc-item">Нужно премиум-позиционирование</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13 — Матрица приоритетов -->
+  <div class="slide">
+    <div class="slide-meta">
+      <span class="slide-num">13</span>
+    </div>
     <div class="slide-title">Приоритизация: кого запускаем первыми</div>
-    <div class="slide-body">
-      Пересечение роли и отрасли — где боль наиболее реальная, частая и готовая к монетизации.
-    </div>
-    <div class="table-wrap">
+
+    <div class="matrix-wrap">
       <table class="matrix">
         <thead>
           <tr>
-            <th class="left-col">Роль ↓ / Сфера →</th>
-            <th><span>Маркетинг / PR</span></th>
-            <th><span>Продажи</span></th>
-            <th><span>Поддержка</span></th>
-            <th><span>Финансы</span></th>
+            <th class="left-col">Роль / Сфера</th>
+            <th>Маркетинг / PR</th>
+            <th>Продажи</th>
+            <th>Финансы</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="role">Джун / нач. специалист</td>
-            <td class="p3">3</td><td class="p3">3</td><td class="p2">2</td><td class="p2">2</td>
+            <td>Джун / нач. специалист</td>
+            <td class="p-high">3</td>
+            <td class="p-high">3</td>
+            <td class="p-mid">2</td>
           </tr>
           <tr>
-            <td class="role">Соискатель</td>
-            <td class="p3">3</td><td class="p3">3</td><td class="p2">2</td><td class="p2">2</td>
+            <td>Соискатель</td>
+            <td class="p-high">3</td>
+            <td class="p-high">3</td>
+            <td class="p-mid">2</td>
           </tr>
           <tr>
-            <td class="role">Фрилансер / client-facing</td>
-            <td class="p3">3</td><td class="p2">2</td><td class="p2">2</td><td class="p1">1</td>
+            <td>Фрилансер / client-facing</td>
+            <td class="p-high">3</td>
+            <td class="p-mid">2</td>
+            <td class="p-low">1</td>
           </tr>
           <tr>
-            <td class="role">Менеджер / тимлид</td>
-            <td class="p2">2</td><td class="p2">2</td><td class="p2">2</td><td class="p2">2</td>
+            <td>Менеджер / тимлид</td>
+            <td class="p-mid">2</td>
+            <td class="p-mid">2</td>
+            <td class="p-mid">2</td>
           </tr>
           <tr>
-            <td class="role">Топ-менеджер / основатель</td>
-            <td class="p1">1</td><td class="p1">1</td><td class="p1">1</td><td class="p2">2</td>
+            <td>Топ-менеджер / основатель</td>
+            <td class="p-low">1</td>
+            <td class="p-low">1</td>
+            <td class="p-mid">2</td>
           </tr>
           <tr>
-            <td class="role">Customer support / success</td>
-            <td class="p1">1</td><td class="p1">1</td><td class="p3">3</td><td class="p1">1</td>
+            <td>Customer success / account</td>
+            <td class="p-mid">2</td>
+            <td class="p-high">3</td>
+            <td class="p-mid">2</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="priority-key">
-      <div class="key-item"><div class="key-dot" style="background:#1D9E75;"></div>3 — высокий приоритет</div>
-      <div class="key-item"><div class="key-dot" style="background:var(--color-text-secondary);"></div>2 — средний</div>
-      <div class="key-item"><div class="key-dot" style="background:var(--color-border-secondary);"></div>1 — отложить</div>
-    </div>
-    <div class="rec-box">
-      <strong>Стратегия запуска.</strong> Начинаем с джунов, фрилансеров и соискателей — это B2C с очевидной болью, коротким циклом принятия решений и низкой стоимостью привлечения. Соискатели работают как точка входа с высокой мотивацией прямо сейчас. После доказательства product-market fit — идём в enterprise: менеджеры, customer success и финансы с командной лицензией.
+
+    <div class="matrix-key">
+      <div class="key-item"><div class="key-dot" style="background:var(--accent)"></div>3 — высокий приоритет</div>
+      <div class="key-item"><div class="key-dot" style="background:var(--text-2)"></div>2 — средний</div>
+      <div class="key-item"><div class="key-dot" style="background:var(--text-3)"></div>1 — отложить</div>
     </div>
   </div>
 
-  <!-- SLIDE 5 -->
+  <!-- SLIDE 14 — Стратегия запуска -->
   <div class="slide">
-    <div class="slide-num">Слайд 5</div>
-    <div class="slide-title">Портрет: начинающий специалист</div>
-    <div class="divider"></div>
-    <div class="two-col">
-      <div>
-        <div class="label">Кто это</div>
-        <div class="body-text">22–28 лет. Первые 1–3 года в профессии. Работает в агентстве, стартапе или корпорации на позиции аккаунт-менеджера, сейлза, project manager, рекрутера, junior маркетолога или customer success. Может быть и начинающим тимлидом — тот, кого недавно повысили и кто впервые столкнулся с необходимостью управлять людьми.</div>
-        <div style="margin-top:1rem;">
-          <div class="label">Ситуация</div>
-          <div class="body-text">Каждый день — коммуникационный стресс: клиенты с претензиями, менеджеры с давлением, созвоны, где надо держать позицию. Человек, может, и знает правильный ответ теоретически — но в моменте теряется, после работы прокручивает разговор и думает «надо было сказать вот так».</div>
+    <div class="slide-meta">
+      <span class="slide-num">14</span>
+    </div>
+    <div class="slide-title">Стратегия запуска</div>
+    <p class="slide-intro">Начинаем с джунов, фрилансеров и соискателей — B2C с очевидной болью, коротким циклом и низкой стоимостью привлечения. После доказательства PMF — идём в B2B.</p>
+
+    <div class="funnel">
+      <div class="funnel-stage funnel-stage-1">
+        <div class="funnel-label">Этап 1 — Запуск</div>
+        <div class="funnel-items">
+          <div class="funnel-item">Соискатели</div>
+          <div class="funnel-item">Джуны</div>
+          <div class="funnel-item">Фрилансеры / agency workers</div>
         </div>
-        <div class="jtbd-box">
-          <div class="jtbd-label">Что он хочет</div>
-          <div class="jtbd-text">Чувствовать себя профессионально уверенным раньше, чем придёт настоящий опыт.</div>
-        </div>
-        <div class="why-box">
-          <div class="why-label">Почему не справляется сам</div>
-          <div class="why-text">Опыт приходит только через реальные ситуации. Просить совета у руководителя — страшно. Рилсы не дают практику. Коуч — слишком дорого.</div>
-        </div>
+        <div class="funnel-desc">B2C · короткий цикл · острая боль прямо сейчас</div>
       </div>
-      <div class="stats-col">
-        <div class="label">Ключевые данные</div>
-        <div class="stat-block">
-          <div class="stat-num">№1</div>
-          <div class="stat-desc">Навык ведения переговоров — дефицит №1 среди бакалавров на первой работе</div>
+
+      <div class="funnel-stage funnel-stage-2">
+        <div class="funnel-label">Этап 2 — Корпоративные лицензии</div>
+        <div class="funnel-items">
+          <div class="funnel-item">Customer success / account</div>
+          <div class="funnel-item">Менеджеры / тимлиды</div>
         </div>
-        <div class="stat-block">
-          <div class="stat-desc" style="font-size:13px; color: var(--color-text-secondary);">Soft skills называют чаще, чем практические навыки, при оценке готовности к работе</div>
+        <div class="funnel-desc">После product-market fit · командные лицензии</div>
+      </div>
+
+      <div class="funnel-stage funnel-stage-3">
+        <div class="funnel-label">Этап 3 — Сильный бренд</div>
+        <div class="funnel-items">
+          <div class="funnel-item">Топы / Founders</div>
         </div>
-        <div style="margin-top:0.5rem;">
-          <div class="label">Ежедневный стресс</div>
-          <div class="tag-row">
-            <span class="tag">Клиенты</span>
-            <span class="tag">Руководители</span>
-            <span class="tag">Созвоны</span>
-            <span class="tag">Чаты</span>
-            <span class="tag">Фидбек</span>
-            <span class="tag">Дедлайны</span>
-          </div>
-        </div>
+        <div class="funnel-desc">Премиум-позиционирование · репутация · персональный подход</div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 6 -->
+  <!-- SLIDE 15 — Резюме -->
   <div class="slide">
-    <div class="slide-num">Слайд 6</div>
-    <div class="slide-title">Портрет: соискатель</div>
-    <div class="divider"></div>
-    <div class="two-col">
-      <div>
-        <div class="label">Кто это</div>
-        <div class="body-text">20–35 лет. Ищет работу — первую или новую. Чаще всего белый воротничок: маркетолог, дизайнер, разработчик, менеджер. Особенно остро проблема стоит у зумеров и тех, кто давно не проходил интервью.</div>
-        <div style="margin-top:1rem;">
-          <div class="label">Ситуация</div>
-          <div class="body-text">Интервью — переговоры под давлением, где каждое слово оценивается, рекрутер может давить или задавать каверзные вопросы, а ставки высокие. Человек готовится, но в моменте может сбиться и поникнуть.</div>
-        </div>
-        <div class="jtbd-box">
-          <div class="jtbd-label">Что он хочет</div>
-          <div class="jtbd-text">Войти в комнату (в том числе виртуальную) и не потеряться.</div>
-        </div>
-        <div class="why-box">
-          <div class="why-label">Почему не справляется сам</div>
-          <div class="why-text">Интервью — редкое событие, потренироваться не на ком. Репетиция с другом не создаёт реального давления. Обратной связи после собеседований почти не дают.</div>
-        </div>
-      </div>
-      <div class="stats-col">
-        <div class="label">Ключевые данные</div>
-        <div class="stat-block">
-          <div class="stat-num">93%</div>
-          <div class="stat-desc">кандидатов испытывают тревогу на собеседованиях</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">41%</div>
-          <div class="stat-desc">больше всего боятся не суметь ответить на сложный вопрос</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">30%</div>
-          <div class="stat-desc">зумеров привлекали родителя к первым переговорам о зарплате</div>
-        </div>
-      </div>
+    <div class="slide-meta">
+      <span class="slide-num">15</span>
     </div>
-  </div>
-
-  <!-- SLIDE 7 -->
-  <div class="slide">
-    <div class="slide-num">Слайд 7</div>
-    <div class="slide-title">Портрет: «Выживающий»</div>
-    <div class="slide-subtitle">«Я снова согласился — хотя понимал, что не надо»</div>
-    <div class="divider"></div>
-    <div class="two-col">
-      <div>
-        <div class="label">Кто это</div>
-        <div class="body-text">24–35 лет. Фрилансер, самозанятый или штатный сотрудник на client-facing роли в творческой или сервисной сфере: дизайнер, SMM-специалист, маркетолог, копирайтер, продюсер, видеограф. Работает напрямую с клиентами — внешними или внутренними.</div>
-        <div style="margin-top:1rem;">
-          <div class="label">Ситуация</div>
-          <div class="body-text">Клиенты давят на цену, меняют ТЗ без доплаты, общаются пассивно-агрессивно или просто грубо. Человек понимает, что его продавливают, но не знает, как ответить без потери клиента или конфликта. В итоге терпит и соглашается, а после разговора остаётся ощущение, что тебя использовали.<br><br>Если это офисный работник — ситуация та же, только вместо клиента — токсичный руководитель или коллега.</div>
-        </div>
-        <div class="jtbd-box">
-          <div class="jtbd-label">Что он хочет</div>
-          <div class="jtbd-text">Перестать чувствовать себя слабым и беспомощным.</div>
-        </div>
-        <div class="why-box">
-          <div class="why-label">Почему не справляется сам</div>
-          <div class="why-text">Страх потерять деньги или работу сильнее желания защитить себя. Не знает как сказать «нет», чтобы не обострить.</div>
-        </div>
-      </div>
-      <div class="stats-col">
-        <div class="label">Ключевые данные</div>
-        <div class="stat-block">
-          <div class="stat-num">72%</div>
-          <div class="stat-desc">сотрудников российских компаний регулярно сталкиваются с деструктивным поведением руководства</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">43%</div>
-          <div class="stat-desc">фрилансеров — на пороге выгорания</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-desc" style="font-size:13px;">Главный триггер — давление клиентов и неумение выстраивать границы</div>
-        </div>
-        <div style="margin-top:0.5rem;">
-          <div class="label">Повторяющаяся боль</div>
-          <div class="tag-row">
-            <span class="tag">Созвоны</span>
-            <span class="tag">Правки</span>
-            <span class="tag">Дедлайны</span>
-            <span class="tag">Деньги</span>
-            <span class="tag">Давление</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 8 — SUMMARY -->
-  <div class="slide">
-    <div class="slide-num">Слайд 8</div>
     <div class="slide-title">Резюме</div>
-    <div class="divider"></div>
-    <div class="summary-grid">
-      <div class="summary-thesis">
-        <div class="summary-thesis-num">Тезис 1</div>
-        <div class="summary-thesis-title">Идём в рабочую среду — это самая острая и монетизируемая боль: здесь коммуникационный провал стоит денег и карьеры, люди это чувствуют прямо сейчас и готовы платить за решение.</div>
+
+    <div class="theses">
+      <div class="thesis">
+        <div class="thesis-num">1</div>
+        <div class="thesis-text">Идём в рабочую среду — это самая острая и монетизируемая боль: здесь коммуникационный провал стоит денег и карьеры, люди это чувствуют прямо сейчас и готовы платить за решение.</div>
       </div>
-      <div class="summary-thesis">
-        <div class="summary-thesis-num">Тезис 2</div>
-        <div class="summary-thesis-title">Фокусируемся на маркетинге / PR, продажах, поддержке и финансах — там стресс структурный, а не случайный: сложные разговоры случаются каждый день, и платёжеспособная аудитория это хорошо понимает.</div>
+      <div class="thesis">
+        <div class="thesis-num">2</div>
+        <div class="thesis-text">Фокусируемся на маркетинге / PR, продажах, поддержке и финансах — там стресс структурный, а не случайный: сложные разговоры случаются каждый день, и платёжеспособная аудитория это хорошо понимает.</div>
       </div>
-      <div class="summary-thesis">
-        <div class="summary-thesis-num">Тезис 3</div>
-        <div class="summary-thesis-title">Начинаем с джунов, фрилансеров и соискателей — они принимают решение сами, боль острая прямо сейчас, цикл сделки короткий; после PMF — выход в enterprise.</div>
-      </div>
-    </div>
-    <div class="summary-note">
-      <div class="summary-note-label">Другие ниши — следующий этап</div>
-      <div class="summary-note-title">B2B и межличностные отношения — возможно, но не сейчас</div>
-      <div class="summary-note-text">
-        <strong>B2B.</strong> Корпоративные лицензии — логичный шаг после PMF: выше чек, но длиннее цикл и нужны другие процессы продаж.<br><br>
-        <strong>Межличностные отношения.</strong> Технически продукт применим, но продавать сложнее: боль воспринимается как психологическая, человек с трудом признаёт, что нужна «тренировка». Это территория терапии — рынок с высоким доверием к людям и низким к технологиям. Стигма и размытая формулировка проблемы делают конверсию низкой даже при реальной боли. Возможно как эволюция — не как старт.
+      <div class="thesis">
+        <div class="thesis-num">3</div>
+        <div class="thesis-text">Начинаем с джунов, фрилансеров и соискателей — они принимают решение сами, боль острая прямо сейчас, цикл сделки короткий; после PMF — выход в enterprise.</div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 9 -->
+  <!-- SLIDE 16 — Что исследовать дальше -->
   <div class="slide">
-    <div class="slide-num">Слайд 9</div>
-    <div class="slide-title">Что нужно исследовать дальше</div>
-    <div class="divider"></div>
-    <div class="intro-box">
-      Данные подтверждают что боль существует и она массовая. Следующий шаг — понять как именно она переживается, что человек уже пробовал и в какой момент он готов заплатить за решение.
+    <div class="slide-meta">
+      <span class="slide-num">16</span>
     </div>
-    <div class="three-col">
-      <div>
-        <div class="q-group">
-          <div class="q-group-title">Джуны и «выживающие»</div>
-          <div class="q-list">
-            <div class="q-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
-            <div class="q-item">Как они сейчас справляются?</div>
-            <div class="q-item">Есть ли стыд вокруг этой проблемы?</div>
-            <div class="q-item">За что они уже платят в контексте карьерного роста?</div>
-            <div class="q-item">Как они оценивают эти траты?</div>
-          </div>
+    <div class="slide-title">Что нужно исследовать дальше</div>
+    <p class="slide-intro">Данные подтверждают, что боль существует и она массовая. Следующий шаг — понять, как именно она переживается, что человек уже пробовал и в какой момент готов заплатить за решение.</p>
+
+    <div class="cards cards-3">
+      <div class="card">
+        <div class="card-label">Джуны и «выживающие»</div>
+        <div class="rg-items" style="margin-top:0.5rem">
+          <div class="rg-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
+          <div class="rg-item">Как они сейчас справляются?</div>
+          <div class="rg-item">Есть ли стыд вокруг этой проблемы?</div>
+          <div class="rg-item">За что они уже платят в контексте карьерного роста?</div>
+          <div class="rg-item">Как они оценивают эти траты?</div>
         </div>
       </div>
-      <div>
-        <div class="q-group">
-          <div class="q-group-title">Соискатели</div>
-          <div class="q-list">
-            <div class="q-item">Как они сейчас готовятся к интервью — и чего не хватает в этом процессе?</div>
-            <div class="q-item">Остаётся ли потребность в развитии коммуникативных навыков после трудоустройства?</div>
-            <div class="q-item">Насколько они готовы платить за подготовку к интервью vs бесплатные ресурсы?</div>
-          </div>
+      <div class="card">
+        <div class="card-label">Соискатели</div>
+        <div class="rg-items" style="margin-top:0.5rem">
+          <div class="rg-item">Как они сейчас готовятся к интервью — и чего не хватает?</div>
+          <div class="rg-item">Остаётся ли потребность после трудоустройства?</div>
+          <div class="rg-item">Готовность платить vs бесплатные ресурсы?</div>
         </div>
       </div>
-      <div>
-        <div class="q-group">
-          <div class="q-group-title">«Выживающие» отдельно</div>
-          <div class="q-list">
-            <div class="q-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
-            <div class="q-item">Что они уже пробовали чтобы решить проблему?</div>
-            <div class="q-item">Считают ли они что это про навык или «просто такой характер»?</div>
-            <div class="q-item">Насколько это актуальная проблема для других сфер жизни?</div>
-          </div>
+      <div class="card">
+        <div class="card-label">«Выживающие» отдельно</div>
+        <div class="rg-items" style="margin-top:0.5rem">
+          <div class="rg-item">Как выглядит топ самых проблемных ситуаций и с кем?</div>
+          <div class="rg-item">Что они уже пробовали, чтобы решить проблему?</div>
+          <div class="rg-item">Это про навык или «просто такой характер»?</div>
+          <div class="rg-item">Насколько актуально для других сфер жизни?</div>
         </div>
       </div>
     </div>
