@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Алина Грахова — Продуктовый маркетолог</title>
+<title>Алина Грахова — Ресерчер</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;700&family=Anonymous+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -30,8 +30,6 @@
     line-height: 1.75;
     overflow-x: hidden;
   }
-
-
 
   .container { max-width: 1100px; margin: 0 auto; padding: 0 4vw; }
 
@@ -78,6 +76,7 @@
     max-width: 480px;
     margin-bottom: 3rem;
   }
+  .hero-bio strong { color: var(--black); font-weight: 700; }
   .hero-meta {
     font-size: 11px;
     color: var(--mid);
@@ -140,40 +139,6 @@
     font-weight: 500;
   }
 
-  /* PET PROJECT */
-  #pet { border-bottom: 0.5px solid var(--black); }
-  .pet-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    padding: 2.5rem 0 3rem;
-  }
-  .pet-status {
-    display: inline-block;
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    border: 0.5px solid var(--black);
-    padding: 3px 8px;
-    margin-bottom: 1.25rem;
-  }
-  .pet-title {
-    font-family: var(--font-head);
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.25rem;
-  }
-  .pet-title em { font-weight: 300; font-style: italic; }
-  .pet-desc {
-    font-size: 13px;
-    line-height: 1.85;
-    color: var(--graphite);
-    margin-bottom: 1.25rem;
-  }
-  .pet-block { margin-bottom: 1.5rem; }
-  .pet-block:last-child { margin-bottom: 0; }
   .mini-label {
     font-size: 9px;
     letter-spacing: 0.16em;
@@ -181,21 +146,29 @@
     color: var(--mid);
     margin-bottom: 0.5rem;
   }
-  .pet-block p { font-size: 13px; line-height: 1.8; color: var(--graphite); }
-  .pet-block ul { list-style: none; padding: 0; }
-  .pet-block ul li {
+
+  /* RESEARCH (02) */
+  #research { border-bottom: 0.5px solid var(--black); }
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 2.5rem 0 3rem;
+  }
+  .two-col-grid .mini-label { font-size: 10px; margin-bottom: 1rem; }
+
+  .case-list { list-style: none; padding: 0; }
+  .case-list li {
     font-size: 13px;
     line-height: 1.8;
     color: var(--graphite);
     padding-left: 1.25rem;
     position: relative;
+    margin-bottom: 2px;
   }
-  .pet-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--light); }
-  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5rem; }
-  .pill { font-size: 11px; padding: 3px 10px; border: 0.5px solid var(--black); letter-spacing: 0.04em; }
-  .pill.filled { background: var(--black); color: var(--white); }
+  .case-list li::before { content: '—'; position: absolute; left: 0; color: var(--light); }
 
-  /* EXPERIENCE + CASES */
+  /* EXPERIENCE + CASES (03) */
   #exp { border-bottom: 0.5px solid var(--black); }
 
   .job-block {
@@ -230,7 +203,7 @@
     letter-spacing: 0.06em;
     margin-bottom: 1rem;
   }
-  .job-duties { list-style: none; padding: 0; }
+  .job-duties { list-style: none; padding: 0; margin-bottom: 0.25rem; }
   .job-duties li {
     font-size: 13px;
     color: var(--graphite);
@@ -296,31 +269,6 @@
   }
   .case-wrap.open .case-body { display: block; }
 
-  .case-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 0.5px solid var(--light);
-    margin-bottom: 2rem;
-  }
-  .summary-cell {
-    padding: 0.85rem 1.1rem;
-    border-right: 0.5px solid var(--light);
-  }
-  .summary-cell:last-child { border-right: none; }
-  .summary-label {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 5px;
-  }
-  .summary-value {
-    font-family: var(--font-head);
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
   .case-sh {
     font-family: var(--font-head);
     font-size: 9px;
@@ -335,17 +283,6 @@
     color: var(--graphite);
   }
   .case-text + .case-text { margin-top: 8px; }
-
-  .case-list { list-style: none; padding: 0; }
-  .case-list li {
-    font-size: 13px;
-    line-height: 1.8;
-    color: var(--graphite);
-    padding-left: 1.25rem;
-    position: relative;
-    margin-bottom: 2px;
-  }
-  .case-list li::before { content: '—'; position: absolute; left: 0; color: var(--light); }
 
   .insight {
     border-left: 2px solid var(--black);
@@ -366,7 +303,6 @@
   }
   .rp.o { background: transparent; color: var(--black); }
 
-  /* stepped list inside case */
   .step { margin-bottom: 1.5rem; }
   .step-head {
     font-family: var(--font-head);
@@ -421,39 +357,75 @@
   }
   .case-link:hover { color: var(--black); border-color: var(--black); }
 
-  /* WHAT I DO */
-  #what { border-bottom: 0.5px solid var(--black); border-top: none; }
-  .what-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding-bottom: 2.5rem; }
-  .what-card {
-    padding: 2.5rem 2rem;
-    border-right: 0.5px solid var(--light);
-    box-sizing: border-box;
-  }
-  .what-card:first-child { padding-left: 0; }
-  .what-card:last-child { border-right: none; padding-right: 0; }
-  .what-icon {
-    width: 30px; height: 30px;
-    border: 0.5px solid var(--black);
-    margin-bottom: 1.25rem;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .what-icon svg { width: 13px; height: 13px; }
-  .what-head {
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-  }
-  .what-desc { font-size: 12px; color: var(--graphite); line-height: 1.8; }
-
   .case-tags { display:flex; flex-wrap:wrap; gap:5px; margin: 0.75rem 0 1.25rem 0; }
   .case-tag {
     font-size:9px; letter-spacing:0.12em; text-transform:uppercase;
     border:0.5px solid var(--light); padding:3px 8px; color:var(--mid);
   }
 
-  /* CONTACT */
+  /* EDUCATION (04) */
+  #education { border-bottom: 0.5px solid var(--black); }
+  .edu-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 1.75rem 0;
+    border-bottom: 0.5px solid var(--light);
+    align-items: baseline;
+  }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-inst {
+    font-family: var(--font-head);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .edu-topic { font-size: 12px; color: var(--mid); line-height: 1.7; }
+
+  /* ABOUT / PHOTOS (05) */
+  #about { border-bottom: 0.5px solid var(--black); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "p1 p1 p1 p1 tx tx"
+      "p2 p2 p3 p3 p4 p4"
+      "p5 p5 p5 p6 p6 p6";
+    grid-template-rows: 440px 230px 340px;
+    gap: 8px;
+    margin: 2.5rem 0 4rem;
+  }
+  .ap-frame { overflow: hidden; background: var(--pale); }
+  .ap-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  @media (hover: hover) {
+    .ap-frame:hover img { transform: scale(1.035); }
+  }
+  .ap1 { grid-area: p1; }
+  .ap2 { grid-area: p2; }
+  .ap3 { grid-area: p3; }
+  .ap4 { grid-area: p4; }
+  .ap5 { grid-area: p5; }
+  .ap6 { grid-area: p6; }
+  .ap-text {
+    grid-area: tx;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 2.25rem;
+    border-left: 0.5px solid var(--black);
+  }
+  .ap-text p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--graphite);
+  }
+
+  /* CONTACT (06) */
   #contact { padding: 0; }
   .contact-grid {
     display: grid;
@@ -461,22 +433,7 @@
     gap: 4rem;
     align-items: start;
   }
-  .contact-head {
-    font-family: var(--font-head);
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .contact-head em {
-    font-weight: 300;
-    font-style: italic;
-    display: block;
-    font-size: 0.82em;
-    color: var(--graphite);
-  }
-  .contact-note { font-size: 12px; color: var(--mid); line-height: 1.7; }
+  .contact-note { font-size: 13px; color: var(--graphite); line-height: 1.85; max-width: 380px; }
   .contact-row {
     display: flex;
     justify-content: space-between;
@@ -488,7 +445,6 @@
   .contact-row-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
   .contact-row a { font-size: 13px; color: var(--black); text-decoration: none; transition: color 0.2s; }
   .contact-row a:hover { color: var(--mid); }
-  .contact-city { font-size: 10px; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.25rem; }
 
   footer {
     border-top: 0.5px solid var(--black);
@@ -501,35 +457,54 @@
     #hero { grid-template-columns: 1fr; padding: 0 4vw; }
     .hero-right { min-height: 70vw; }
     .hero-left { padding: 3rem 0 2.5rem; border-right: none; border-bottom: 0.5px solid var(--black); }
-    .pet-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+    .two-col-grid { grid-template-columns: 1fr; gap: 2rem; }
+
     .job-header { grid-template-columns: 1fr; gap: 0.25rem; }
     .case-wrap { margin-left: 0; }
-    .case-summary { grid-template-columns: 1fr; }
-    .summary-cell { border-right: none; border-bottom: 0.5px solid var(--light); }
-    .what-grid { grid-template-columns: 1fr; }
-    .what-card { border-right: none; border-bottom: 0.5px solid var(--light); padding: 1.75rem 0; }
-    .what-card:last-child { border-bottom: none; }
+
+    .edu-row { grid-template-columns: 1fr; gap: 0.25rem; }
+
+    .about-grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-areas:
+        "tx tx tx tx tx tx"
+        "p1 p1 p1 p1 p1 p1"
+        "p2 p2 p3 p3 p4 p4"
+        "p5 p5 p5 p6 p6 p6";
+      grid-template-rows: auto;
+      gap: 6px;
+      margin: 1.5rem 0 3rem;
+    }
+    .ap-text {
+      border-left: none;
+      border-bottom: 0.5px solid var(--black);
+      padding: 0 0 1.25rem 0;
+      margin-bottom: 0.5rem;
+    }
+    .ap1 .ap-frame, .ap1 { aspect-ratio: 4 / 3; }
+    .ap2, .ap3, .ap4 { aspect-ratio: 1 / 1; }
+    .ap5, .ap6 { aspect-ratio: 3 / 4; }
+
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   }
 </style>
 </head>
 <body>
 
-
-
-<!-- HERO -->
+<!-- HERO / 01 ЧТО ИЩУ -->
 <section id="hero">
   <div class="hero-left">
     <div>
       <div class="section-label" style="padding-top:2rem; margin-bottom:2rem;">
         <span class="section-num">01</span>
-        <span class="section-title">Обо мне</span>
+        <span class="section-title">Что ищу</span>
       </div>
       <h1 class="hero-name">
         Алина
         <span class="thin">Грахова</span>
       </h1>
-      <p class="hero-bio">Специализируюсь на исследованиях аудитории, стратегии и упаковке сложных продуктов. Особенно интересны ниши, где продукт не всегда очевиден: онлайн-образование, EdTech, wellness, нематериальные и экспертные продукты.<br><br>Работаю на стыке продукта и маркетинга: от глубинных интервью и анализа рынка — до позиционирования, продуктовой линейки, CJM и стратегии запуска. <br><br>Интересны позиции продуктового маркетолога, стретега, ресерчера — все с фокусом на исследование, позиционирование и упаковку продукта.</p>
+      <p class="hero-bio">Исследую аудиторию, рынок и контекст продукта до того, как появляются позиционирование, коммуникация или бренд.<br><br><strong>Сейчас ищу проектную работу, связанную с исследованиями: </strong>исследование аудитории, рынка, конкурентов, поиск инсайтов, разработка концепций и продуктовых гипотез.</p>
     </div>
     <div class="hero-meta">
       <a href="mailto:grakhova.alina@gmail.com" style="color:inherit;text-decoration:none;">grakhova.alina@gmail.com</a>
@@ -551,309 +526,91 @@
   </div>
 </section>
 
-<!-- EXPERIENCE + CASES -->
-<section id="exp">
+<!-- 02 ПРО ИССЛЕДОВАНИЯ -->
+<section id="research">
   <div class="container">
     <div class="section-label">
       <span class="section-num">02</span>
-      <span class="section-title">Опыт</span>
+      <span class="section-title">Про исследования</span>
+    </div>
+    <div class="two-col-grid">
+      <div>
+        <div class="mini-label">Что исследую</div>
+        <ul class="case-list">
+          <li>аудиторию (глубинные интервью, опросы, JTBD)</li>
+          <li>рынок и конкурентную среду</li>
+          <li>потребительские сценарии</li>
+          <li>барьеры и драйверы выбора</li>
+          <li>позиционирование</li>
+          <li>коммуникационные гипотезы</li>
+          <li>культурный и отраслевой контекст</li>
+        </ul>
+      </div>
+      <div>
+        <div class="mini-label">С кем работала</div>
+        <ul class="case-list">
+          <li>промышленность</li>
+          <li>девелопмент</li>
+          <li>IT / AI</li>
+          <li>образование</li>
+          <li>культурные проекты</li>
+          <li>ритейл</li>
+          <li>HoReCa</li>
+          <li>FMCG</li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top: 0.5px solid var(--light); padding: 2rem 0 3rem;">
+      <div class="mini-label">Тестовые задания</div>
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <a href="https://docs.google.com/presentation/d/1bhdQZtqrO8s8nwPu5Laj76nHVivBOszrIBgbv0xyUIE/edit" target="_blank" class="case-link" style="margin-top:0;">Аналитическая справка — ЖК «Малиновые высоты» →</a>
+        <a href="https://docs.google.com/presentation/d/1ySq_j3cc_4jeUXAwZEO9r5QTkacpITBMxBWPm_qLEsw/edit" target="_blank" class="case-link" style="margin-top:0;">Исследование категории — культура сладостей Кыргызстана (Barbol) →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ОПЫТ РАБОТЫ -->
+<section id="exp">
+  <div class="container">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-title">Карьерный путь</span>
     </div>
 
-    <!-- FRENCH COURSE - personal project -->
+    <!-- PLENUM -->
     <div class="job-block">
       <div class="job-header">
-        <div class="job-date">Апр 2025 —<br>наст. вр.</div>
+        <div class="job-date">Июнь 2026 —<br>наст. вр.</div>
         <div>
-          <div class="job-role">Разработка программы французского A1</div>
-          <div class="job-company">Личный проект</div>
-          <p style="font-size:13px; color:var(--graphite); line-height:1.8; margin-top:0.5rem;">Я училась в Париже и 5 лет преподавала французский, а сейчас почти полностью его забыла. «Освежить» язык я решила через проект: написать курс для начинающих, который сама бы хотела преподавать и проходить.</p>
-        </div>
-      </div>
-      <div class="case-wrap" id="c-french">
-        <div class="case-toggle-row" onclick="toggleCase('c-french')">
-          <span class="case-toggle-label">Личный проект</span>
-          <span class="case-toggle-title">Курс с сюжетом про исчезновение шеф-повара</span>
-          <span class="case-plus">+</span>
-        </div>
-        <div class="case-body">
-          <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
-            Размышляю о том, как может выглядеть современный курс французского языка: глубокий и целостный, но при этом такой, чтобы хотелось делиться с друзьями впечатлениями после урока. 
-          </div>
-
-          <div class="case-sh" style="margin-top:0;">Контекст</div>
-          <p class="case-text">Ранее подготовка к занятиям была недостаточно эффективной: не существует готовых программ, которые можно использовать без значительных доработок — курс собирался как «конструктор» из учебника и дополнительных материалов. Отсутствовала целостность программы, лексика и грамматика не усиливали друг друга, студентам было сложнее усваивать материал (особенно на уровне A1).</p>
-
-          <div class="case-sh">Задача</div>
-          <p class="case-text">Спроектировать цельную программу курса французского для начинающих (A1) в групповом формате.</p>
-
-          <div class="case-sh">Критерии</div>
-          <ul class="case-list">
-            <li>56 уроков (112 академических часов), 2 блока по 3,5 месяца</li>
-            <li>Отойти от устаревшего тематического подхода к task-based learning</li>
-            <li>Сквозная логика: взаимосвязь лексики и грамматики + регулярное повторение</li>
-            <li>Общий сюжет как объединяющий элемент курса</li>
-            <li>≥ 2/3 времени — разговорная практика</li>
-            <li>Интеграция культурного контекста</li>
-            <li>Геймификация и встроенная мотивация</li>
-            <li>Контрольные задания встроены в сценарий</li>
+          <div class="job-role">PR-менеджер</div>
+          <div class="job-company">Plenum — брендинговое агентство</div>
+          <ul class="job-duties">
+            <li>подготовка и оформление кейсов агентства</li>
+            <li>подготовка материалов для СМИ</li>
+            <li>развитие Telegram-канала</li>
+            <li>организация внутренних мероприятий</li>
           </ul>
-
-          <div class="case-sh">Что хочу проверить</div>
-          <ul class="case-list">
-            <li>Сквозной сюжет повышает доходимость курса</li>
-            <li>Интеграция культурного контекста повышает мотивацию и улучшает усвоение</li>
-            <li>Обучение по программе с сюжетом воспринимается как что-то несерьёзное</li>
-          </ul>
-
-          <div class="case-sh">Что я уже сделала</div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">1.</span>Продумала нарративную модель</div>
-            <p class="step-text">Рассмотрела два подхода сценария: «под прикрытием» и «новый в среде». Выбрала второй формат как более реалистичный для начинающих и группового обучения. Проектировала несколько вариантов и остановилась на детективном сюжете вокруг исчезновения шеф-повара в Michelin-ресторане.</p>
-            <div class="step-insight">
-              <p>Студенты курса оказываются в роли журналистов, приехавших в Лион освещать вручение звезды Мишлен ресторану. В процессе они оказываются вовлечены в расследование исчезновения шеф-повара. Сюжет развивается от Лиона к Провансу и связывает все уроки в единую историю. Каждый урок — это реальная жизненная ситуация (поиск жилья, общение в ресторане, бытовые диалоги), которая одновременно решает языковую задачу и двигает сюжет вперёд.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">2.</span>Продумала метрики</div>
-            <ul class="step-list">
-              <li>Доходимость курса</li>
-              <li>Выполнение домашних заданий и тестов</li>
-              <li>Качественная обратная связь</li>
-              <li>→ целевые значения и стратегию доработки определю по итогам пилота</li>
-            </ul>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">3.</span>Проработала архитектуру курса</div>
-            <ul class="step-list">
-              <li>Спроектировала полную структуру курса на уровне каждого урока</li>
-              <li>Для каждого занятия определила роль в сюжете, языковые цели, коммуникативные задачи и культурный контекст</li>
-              <li>Выстроила взаимосвязи между уроками (повторение и наслаивание, возвращение к ранее изученному, сквозные элементы сюжета)</li>
-            </ul>
-          </div>
-
-          <div class="case-sh">Текущий статус</div>
-          <div class="result-pills">
-            <span class="rp">Архитектура готова</span>
-            <span class="rp o">В работе опрос для исследования ЦА</span>
-            <span class="rp o">Готовятся первые 28 уроков</span>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- FREELANCE -->
+    <!-- CONTENT MARKETER -->
     <div class="job-block">
       <div class="job-header">
-        <div class="job-date">Окт 2025 —<br>наст. вр.</div>
+        <div class="job-date">Окт 2025 —<br>май 2026</div>
         <div>
-          <div class="job-role">Продуктовый маркетолог / SMM</div>
-          <div class="job-company">Фриланс</div>
-            <p class="case-text">На фрилансе я подключалась к разным проектам — в основном культурным и образовательным — и помогала навести порядок в том, как они рассказывают про свои продукты и себя. Это была смесь исследований, стратегии и «работы руками»: от визуала и текстов до воронок и иногда даже верстки сайтов.</p>
-        </div>
-      </div>
-      <div class="case-wrap" id="c-chaika-main">
-        <div class="case-toggle-row" onclick="toggleCase('c-chaika-main')">
-          <span class="case-toggle-label">Кейс</span>
-          <span class="case-toggle-title">Переупаковка лагеря с высоким чеком и неочевидной ценностью</span>
-          <span class="case-plus">+</span>
-        </div>
-        <div class="case-body">
-          <div class="case-tags">
-            <span class="case-tag">Исследование ЦА</span>
-            <span class="case-tag">Позиционирование</span>
-            <span class="case-tag">Упаковка продукта</span>
-            <span class="case-tag">Воронка</span>
-            <span class="case-tag">Абстрактная ценность</span>
-          </div>
-          <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
-Продукт концептуально сильный, но описывался через оптику художественной среды, понятную создателям, но не родителям. Кейс про то, как важно говорить с аудиторией на одном языке.
-          </div>
-
-          <div class="case-sh" style="margin-top:0;">Клиент</div>
-          <p class="case-text">«Чайка» — детская студия развития гибких навыков через художественные практики, организует творческие занятия и летний лагерь</p>
-
-          <div class="case-sh">Контекст</div>
-          <p class="case-text">За 7 лет на рынке у компании не было сформулированной платформы бренда, а продукты не были упакованы с точки зрения ценности и выгод — описывались в экспертной и искусствоведческой логике. Ценность доносилась до родителей преимущественно при личном контакте. Лагерь — ключевой продукт с высоким чеком — стабильно не добирал вторую смену, несмотря на высокие отзывы участников.</p>
-
-          <div class="case-sh">Задача</div>
-          <p class="case-text">Один из аспектов — это переупаковать лагерь, сохранив глубину образовательной концепции, и повысить конверсию в покупку.</p>
-            <div class="step-insight">
-              <p>Формально продукт — это прогулки по городу и занятия в студии, и это стоит 28 000 ₽ за 5 дней.</p>
-            </div>
-          <div class="case-sh">Что я сделала</div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">1.</span>Провела исследование</div>
-            <ul class="step-list">
-              <li>Опрос 23 родителей, которые уже покупали ребёнку смену: мотивация, триггеры, барьеры к повторной покупке</li>
-              <li>Анализ 7 конкурентов: как формулируют ценность летних программ, какие смыслы выносят на первый план</li>
-            </ul>
-            <div class="step-insight">
-              <p>Родители готовы платить за «неосязаемые» результаты (развитие, мышление, опыт), но решение должно закрывать и конкретные бытовые задачи — в частности, снижение экранного времени и более сильное вовлечение ребёнка в реальный мир.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">2.</span>Пересобрала позиционирование</div>
-            <p class="step-text">Сместила фокус с больших идей о симулякрах на результат и опыт ребёнка. Лагерь как опыт погружения в реальный мир → навык находить опору и вдохновение вне цифрового контекста.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">3.</span>Переупаковала продукт</div>
-            <ul class="step-list">
-              <li>Декомпозировала программу в понятные результаты — выгоды и изменения ребёнка</li>
-              <li>Подготовила тексты для лендинга и карточек продуктов в ВК</li>
-              <li>Собрала Taplink как одну из составляющих воронки</li>
-            </ul>
-
-            <div style="margin: 1.25rem 0 0 1.8rem;">
-              <div class="mini-label" style="margin-bottom:0.75rem;">До и после — описание смены</div>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                <div style="border:0.5px solid var(--light); padding:1rem; font-size:12px; line-height:1.8; color:var(--mid);">
-                  <div style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--light);">Было</div>
-                  «Сегодня дети живут среди экранов и копий, и смотрят на мир через фильтры. Искусство возвращает объём: учит смотреть на мир в целом, а не на его отредактированные кусочки. Нам важно погрузить ребёнка в среду. Ведь скульптуру нельзя изучить по фото, архитектуру сложновато обойти онлайн, а репродукции не передают и сотой доли ощущения от картин. Наша миссия — вывести детей из плоского мира в мир оригиналов и сформировать вдумчивый и аналитический взгляд на окружающую реальность.»
-                </div>
-                <div style="border:0.5px solid var(--black); padding:1rem; font-size:12px; line-height:1.8; color:var(--graphite);">
-                  <div style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--mid);">Стало</div>
-                  Летний лагерь «Чайки» — это две недели живой работы с городом:<br><br>
-                  — Петербург как диалог культур: дворы, мастерские, галереи, живые разговоры с архитекторами и дизайнерами — ребёнок увидит город так, как не увидит ни на одной экскурсии<br><br>
-                  — Целое портфолио за одну смену: не одна поделка на память, а несколько полноценных проектов с концепцией, визуальным решением и авторским стилем<br><br>
-                  — Опыт, который меняет: ребёнок успевает побыть и исследователем, и поклонником, и автором — и возвращается домой с другим взглядом на всё, что его окружает
-                </div>
-              </div>
-            </div>
-
-            <div style="display:flex; gap:10px; margin-top:0.75rem; margin-left:1.8rem; flex-wrap:wrap;">
-              <a href="https://disk.yandex.ru/i/D_tNeySc4bRHsw" target="_blank" class="case-link" style="margin-top:0;">Как говорили о лагере раньше →</a>
-              <a href="https://taplink.cc/leto_chaika" target="_blank" class="case-link" style="margin-top:0;">Как его писывают сейчас →</a>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">4.</span>Спроектировала воронку</div>
-            <p class="step-text" style="margin-bottom:0.75rem;">Цель: собрать 2 смены по 10–12 человек (20–24 участника). Taplink — связующий узел между всеми каналами.</p>
-
-            <div style="margin-left:1.8rem; margin-top:0.5rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">Тёплая аудитория (текущая база)</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Публикации в соцсетях + рассылка в родительские чаты → вебинар с основателем → промо-день (1 день лагеря) → догрев через контент, рассылку и звонки → запись</p>
-            </div>
-
-            <div style="margin-left:1.8rem; margin-top:0.75rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">Холодная аудитория</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Промо вебинара → вебинар → догрев в чате вебинара → прогрев на промо-день и на лагерь через контент + промо промо-дня → догрев через контент, рассылку и звонки → запись</p>
-            </div>
-          </div>
-
-          <div class="case-sh">Результат</div>
-          <div class="result-pills">
-            <span class="rp">После первой рассылки смены заполнились на ~25%</span>
-            <span class="rp o">Полностью протестировать воронку не удалось — сотрудничество завершилось</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-wrap" id="c-rep-main">
-        <div class="case-toggle-row" onclick="toggleCase('c-rep-main')">
-          <span class="case-toggle-label">Кейс</span>
-          <span class="case-toggle-title">Поиск точек роста для музыкального репетитория с низкой загрузкой</span>
-          <span class="case-plus">+</span>
-        </div>
-        <div class="case-body">
-          <div class="case-tags">
-            <span class="case-tag">Исследование ЦА</span>
-            <span class="case-tag">Платформа бренда</span>
-            <span class="case-tag">GTM-стратегия</span>
-            <span class="case-tag">B2B / B2C</span>
-            <span class="case-tag">Нулевой бюджет</span>
-          </div>
-          <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
-           Кейс о том, как работающий продукт остаётся без клиентов, когда маркетинг воспринимается как необязательная надстройка, а не часть бизнеса.
-          </div>
-
-          <div class="case-sh" style="margin-top:0;">Клиент</div>
-          <p class="case-text">Репетиторий №1 — аренда классов с шумоизоляцией для занятий музыкой</p>
-
-          <div class="case-sh">Контекст</div>
-          <p class="case-text">Низкая загрузка: 20–25% в сезон, маркетинговой стратегии нет. Основной канал привлечения — Яндекс Карты → переход на сайт → бронирование. При этом сайт с очень низким юзабилити, что давало низкую конверсию в бронирование.</p>
-
-          <div class="case-sh">Задача</div>
-          <p class="case-text">Повысить заполняемость репетитория.</p>
-
-          <div class="case-sh">Что я сделала</div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">1.</span>Провела исследование</div>
-            <ul class="step-list">
-              <li>Интервью с собственниками, анализ рынка и конкурентов</li>
-            </ul>
-            <div class="step-insight">
-              <p>Для значительной части аудитории занятия музыкой связаны со стрессом, давлением и страхом ошибки. Пользователям важно безопасное, «домашнее» пространство.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">2.</span>Прописала платформу бренда</div>
-            <p class="step-text">Сформулировала большую идею: «Репетиторий №1 — занятия как дома». Смещение с «аренды классов» на опыт и состояние.</p>
-            <a href="https://grakhovaalina-pixel.github.io/repetitoriy1/brand_platform" target="_blank" class="case-link" style="display:inline-flex; margin-left:1.8rem;">Платформа бренда →</a>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">3.</span>Сверстала новый сайт</div>
-            <p class="step-text">Текущий сайт создан на устаревшем конструкторе REG.RU, который не позволял реализовать нужный UX. Сверстала 7 страниц через код с сохранением визуальной преемственности:</p>
-            <ul class="step-list" style="margin-top:0.5rem;">
-              <li>Заложила структуру, отвечающую на ключевые барьеры и запросы</li>
-              <li>Разделила аудитории на первом экране: преподаватели / ученики — для каждой своя логика сценария</li>
-              <li>Собрала и структурировала все предложения</li>
-            </ul>
-            <div style="display:flex; gap:10px; margin-top:0.75rem; margin-left:1.8rem; flex-wrap:wrap;">
-              <a href="https://grakhovaalina-pixel.github.io/repetitoriy1/" target="_blank" class="case-link" style="margin-top:0;">Новый сайт →</a>
-              <a href="https://repetitoriy1.ru/" target="_blank" class="case-link" style="margin-top:0;">Старый сайт →</a>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">4.</span>Продумала стратегию</div>
-            <p class="step-text">Учитывая загрузку 20–25% и минимальный бюджет, предложила работать по трём направлениям:</p>
-
-            <div style="margin: 0.75rem 0 0 1.8rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">B2B — основной драйвер</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Партнёрство с преподавателями и музыкальными школами: персональное предложение через личный контакт → страница «Для педагогов» с условиями → реферальная схема. Преподаватель приводит учеников — появляется регулярная загрузка без постоянных затрат на привлечение.</p>
-            </div>
-
-            <div style="margin: 0.75rem 0 0 1.8rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">Яндекс Карты — работающий канал</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Реклама через Яндекс.Бизнес уже запущена. Задача — повысить конверсию: улучшить карточку (визуал, описание, структура услуг), системно работать с отзывами. Холодная аудитория попадает на страницу «Для учеников» с чистым UX.</p>
-            </div>
-
-            <div style="margin: 0.75rem 0 0 1.8rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">B2C офлайн — точки контакта</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Офлайн-активации в музыкальных школах и культурных пространствах: QR-код → страница «Для учеников». При наличии аудитории — возможен ретаргетинг.</p>
-            </div>
-
-            <div style="margin: 0.75rem 0 0 1.8rem;">
-              <div class="mini-label" style="margin-bottom:0.5rem;">Следующий этап — при загрузке 40%+</div>
-              <p style="font-size:12px; color:var(--graphite); line-height:1.8;">Когда появятся бюджет и стабильный поток: контекстная реклама, ведение соцсетей, таргет. Параллельно — формат «музыкальных квартирников»: камерные вечера с живой музыкой как инструмент event-маркетинга для привлечения новой аудитории и формирования комьюнити вокруг пространства.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-head"><span class="step-num">—</span>Метрики</div>
-            <ul class="step-list">
-              <li>Целевая заполняемость: 40%+ (сейчас 20–25%) — триггер для расширения стратегии</li>
-              <li>B2B: количество подключённых преподавателей, их конверсия в регулярных арендаторов</li>
-              <li>Яндекс Карты: клики → звонки/бронирования (конверсия из карточки)</li>
-              <li>Сайт: трафик по страницам «Для педагогов» / «Для учеников», конверсия в бронирование</li>
-            </ul>
-          </div>
-
-          <div class="case-sh">Статус</div>
-          <div class="result-pills">
-            <span class="rp o">Сайт в процессе переноса на домен репетитория</span>
-            <span class="rp o">Следующий шаг — запуск и тестирование каналов B2B / B2C</span>
-          </div>
+          <div class="job-role">Контент-маркетолог</div>
+          <div class="job-company">Образовательные и культурные проекты</div>
+          <ul class="job-duties">
+            <li>исследования аудитории и конкурентов</li>
+            <li>разработка позиционирования</li>
+            <li>упаковка продуктов</li>
+            <li>создание коммуникационных материалов</li>
+            <li>написание текстов</li>
+            <li>проектирование сайтов и лендингов</li>
+            <li>контент-стратегии</li>
+          </ul>
         </div>
       </div>
 
@@ -873,10 +630,9 @@
           </div>
           <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
            Проект, который не взлетел — но дал понять, что каналы привлечения формируют не только аудиторию, но и саму судьбу продукта. Честный кейс про исследование, концепцию и то, почему потенциально хорошая идея может заглохнуть, если не найдет своего пользователя.
-
           </div>
 
-          <div class="case-sh">Контекст</div>
+          <div class="case-sh" style="margin-top:0;">Контекст</div>
           <p class="case-text">Идея возникла из личной боли основателя: он — фрилансер, который после переезда в новый город столкнулся с отсутствием профессионального офлайн-круга своего уровня. До начала работы со мной уже была протестирована первая версия продукта — запуск нескольких чатов по городам с массовым привлечением аудитории. Через 2 месяца чаты не ожили, коммуникация не сформировалась.</p>
 
           <div class="case-sh">Задача</div>
@@ -916,7 +672,7 @@
           </div>
 
           <div class="step">
-            <div class="step-head"><span class="step-num">3.</span>Предложила альтернативы</div>
+            <div class="step-head"><span class="step-num">4.</span>Предложила альтернативы</div>
             <p class="step-text" style="margin-bottom:0.5rem;">Нереализованные гипотезы:</p>
             <ul class="step-list">
               <li><strong>Интеграция с платформой для фрилансеров</strong> — комьюнити как «социальный слой» поверх площадки с вакансиями</li>
@@ -936,7 +692,14 @@
         <div>
           <div class="job-role">Коммуникационный стратег</div>
           <div class="job-company">Коммуникационное агентство F P R</div>
- <p class="case-text">В агентстве я делала стратегии с нуля: через исследования пыталась понять продукт, аудиторию и рынок, а потом собрать из этого целостную схему коммуникации.  После запуска помогала команде ставить стратегию «на рельсы» — в первые месяцы с коллегами запускали каналы (контент, инфлюенсеры, перформанс и др.), смотрели, что работает, и постепенно это оптимизировали. Параллельно занималась внутренними процессами — делала обучающие материалы, тестировала разные подходы к стратегиям, участвовала в тендерах. Проекты были из разных сфер: HoReCa, fashion, wellness.</p>
+          <ul class="job-duties">
+            <li>исследования аудитории и рынка</li>
+            <li>разработка коммуникационных стратегий</li>
+            <li>создание продуктовых концепций</li>
+            <li>участие в тендерах</li>
+            <li>запуск новых проектов</li>
+            <li>сопровождение реализации стратегии</li>
+          </ul>
         </div>
       </div>
 
@@ -955,7 +718,7 @@
             <span class="case-tag">E-commerce</span>
           </div>
           <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
-            Кейс про то, что стратегия не может строиться только на бенчмарках  и как глубокое погружение в продукт меняет логику всей коммуникации.
+            Кейс про то, что стратегия не может строиться только на бенчмарках и как глубокое погружение в продукт меняет логику всей коммуникации.
           </div>
 
           <div class="case-sh" style="margin-top:0;">Клиент</div>
@@ -1024,12 +787,9 @@
             <span class="rp o">Первые стабильные заказы с рекламных каналов</span>
             <span class="rp o">Основной рост через маркетплейсы как временное решение</span>
           </div>
-
-
         </div>
       </div>
 
-      <!-- BALTIKA -->
       <div class="case-wrap" id="c2b">
         <div class="case-toggle-row" onclick="toggleCase('c2b')">
           <span class="case-toggle-label">Кейс</span>
@@ -1077,24 +837,24 @@
             <div class="step-head"><span class="step-num">2.</span>Разработала 3 продуктовые концепции</div>
             <p class="step-text" style="margin-bottom:0.75rem;"><strong>1. «Пшеничка» — современная русская кухня</strong></p>
             <ul class="step-list" style="margin-bottom:0.75rem;">
-<li>Основана на тренде на переосмысление русской кухни и росте интереса к национальной культуре в связи с геополитическими событиями</li>
-             <li>Интерьер — сочетание традиционных русских элементов с современным минимализмом. </li>
-             <li>Кухня — российская из продуктов от локальных фермеров</li>  
-             <li>Задача: подчеркнуть, что «Балтика» — полностью российская компания с сильным локальным наследием, вызвать гордость и уважение</li>
+              <li>Основана на тренде на переосмысление русской кухни и росте интереса к национальной культуре в связи с геополитическими событиями</li>
+              <li>Интерьер — сочетание традиционных русских элементов с современным минимализмом</li>
+              <li>Кухня — российская из продуктов от локальных фермеров</li>
+              <li>Задача: подчеркнуть, что «Балтика» — полностью российская компания с сильным локальным наследием, вызвать гордость и уважение</li>
             </ul>
             <p class="step-text" style="margin-bottom:0.75rem;"><strong>2. «Петербург–Шанхай» — азиатская концепция</strong></p>
             <ul class="step-list" style="margin-bottom:0.75rem;">
-<li>Основана на факте экспорта продукции в Азию и наличии отдельных сортов пива для этого рынка, попадает в тренд на азиатскую кухню и культуру</li>
-             <li>Интерьер — пространство в стилистике дореволюционного транссиб-поезда. </li>
-             <li>Кухня — синтез российской и азиатских традиций, продуманные пэйринги с пивом.</li>  
-             <li>Задача: с одной стороны — показать Балтику как глобальный бренд, с другой — радикальное обновление восприятия и привлечение новой аудитории.</li>
+              <li>Основана на факте экспорта продукции в Азию и наличии отдельных сортов пива для этого рынка, попадает в тренд на азиатскую кухню и культуру</li>
+              <li>Интерьер — пространство в стилистике дореволюционного транссиб-поезда</li>
+              <li>Кухня — синтез российской и азиатских традиций, продуманные пэйринги с пивом</li>
+              <li>Задача: с одной стороны — показать Балтику как глобальный бренд, с другой — радикальное обновление восприятия и привлечение новой аудитории</li>
             </ul>
             <p class="step-text" style="margin-bottom:0.75rem;"><strong>3. «Светлое будущее» — мультиформатное пространство</strong> (выбранная концепция)</p>
             <ul class="step-list">
-              <li>Основана на технологических достижениях бренда, о которых узнала из пресс-релизов и на экскурсии на завод </li>
-             <li>Интерьер — большое мультиформатное пространство с зонированим под разные форматы потребления, кластер. Большой фокус на технологичный пользовательский опыт (интерактивные экраны, «вау»-механики в подаче продукта и т.д.)</li>
-             <li>Кухня — современный фьюжн, сезонное меню </li>  
-             <li>Задача: показать Балтику как технического лидера категории, прогрессивную компанию </li>
+              <li>Основана на технологических достижениях бренда, о которых узнала из пресс-релизов и на экскурсии на завод</li>
+              <li>Интерьер — большое мультиформатное пространство с зонированием под разные форматы потребления, кластер. Большой фокус на технологичный пользовательский опыт (интерактивные экраны, «вау»-механики в подаче продукта и т.д.)</li>
+              <li>Кухня — современный фьюжн, сезонное меню</li>
+              <li>Задача: показать Балтику как технического лидера категории, прогрессивную компанию</li>
             </ul>
           </div>
 
@@ -1103,12 +863,9 @@
             <span class="rp">Концепции разработаны и презентованы в срок</span>
             <span class="rp o">Выбран один концепт — передан в проработку с ресторанной группой</span>
           </div>
-
-
         </div>
       </div>
 
-      <!-- FOODKULTURA -->
       <div class="case-wrap" id="c2c">
         <div class="case-toggle-row" onclick="toggleCase('c2c')">
           <span class="case-toggle-label">Кейс</span>
@@ -1171,11 +928,8 @@
             <span class="rp">Стратегия принята с минимальными правками</span>
             <span class="rp o">Передана в реализацию команде</span>
           </div>
-
-
         </div>
       </div>
-
     </div>
 
     <!-- PROSHKOLA -->
@@ -1185,7 +939,12 @@
         <div>
           <div class="job-role">Менеджер продукта</div>
           <div class="job-company">Институт нейропсихологии PROШКОЛА</div>
- <p class="case-text">Работала с образовательными продуктами в нише нейропсихологии — узкой и специфической. Анализировала рынок и конкурентов, очень много исследовала адудиторию, искала спикеров. участвовала в формировании продуктовой линейки и логики курсов, участвовала в запусках и отслеживала метрики</p>
+          <ul class="job-duties">
+            <li>исследование аудитории, рынка и конкурентов</li>
+            <li>проведение глубинных интервью и количественных исследований</li>
+            <li>разработка концепций новых образовательных продуктов</li>
+            <li>участие в запусках и анализ продуктовых метрик</li>
+          </ul>
         </div>
       </div>
       <div class="case-wrap" id="c3">
@@ -1203,7 +962,8 @@
             <span class="case-tag">Продуктовая линейка</span>
           </div>
           <div class="case-intro" style="border:0.5px solid var(--light); padding:1rem 1.25rem; margin-bottom:1.75rem; font-size:13px; line-height:1.8; color:var(--graphite);">
-            Весь кейс про то, как найти баланс между тем, что хочет аудитория, и тем, что реально можно сделать и что продукт не обязан идеально закрывать все потребности, чтобы продаваться.
+            Весь кейс про то, как найти баланс между тем, что хочет аудитория, и тем, что реально можно сделать — и про то, что продукт не обязан идеально закрывать все потребности, чтобы продаваться.
+          </div>
 
           <div class="case-sh" style="margin-top:0;">Клиент</div>
           <p class="case-text">Институт нейропсихологии PROШКОЛА — онлайн-институт с аккредитованными программами переподготовки</p>
@@ -1254,65 +1014,67 @@
             <span class="rp o">Стабильный входной курс в линейке</span>
           </div>
           <a href="https://proshkola18.ru/nejropsih_podhod_podgotov_shkolet" target="_blank" class="case-link">Смотреть курс →</a>
-
-
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHAT I DO -->
-<section id="what">
-  <div class="container">
-    <div class="section-label">
-      <span class="section-num">03</span>
-      <span class="section-title">Что умею</span>
-    </div>
-    <div class="what-grid">
-      <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
-            <circle cx="7" cy="7" r="5"/><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/>
-          </svg>
-        </div>
-        <div class="what-head">Исследования</div>
-        <p class="what-desc">Глубинные интервью, фокус-группы, количественные опросы, JTBD, Customer Development. Анализ отзывов и обсуждений. Анализ рынка, конкурентный разбор, мониторинг трендов.</p>
-      </div>
-      <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
-            <rect x="1" y="1" width="5" height="5"/><rect x="8" y="1" width="5" height="5"/>
-            <rect x="1" y="8" width="5" height="5"/><rect x="8" y="8" width="5" height="5"/>
-          </svg>
-        </div>
-        <div class="what-head">Стратегия и упаковка</div>
-        <p class="what-desc">Сегментация ЦА, портреты пользователей, платформа бренда, позиционирование, УТП, ключевые сообщения, tone of voice. CJM, проектирование воронок, продуктовая линейка, GTM-стратегия, коммуникационная стратегия. Формулировка и приоритизация гипотез.</p>
-      </div>
-      <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
-            <polyline points="1,10 4,6 7,8 10,3 13,5"/>
-            <circle cx="13" cy="5" r="1" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="what-head">Инструменты</div>
-        <p class="what-desc">Miro, Notion, Trello, Slack^ Bitrix24.<br>Yandex Metrica, Google Analytics.<br>Tilda, Google Workspace, Figma<br>Широкий инструментарий: могу собрать лендинг, написать тексты, сверстать карусели для Instagram и договориться о коллабах.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" style="border-bottom: none;">
+<!-- 04 (САМО)ОБРАЗОВАНИЕ -->
+<section id="education">
   <div class="container">
     <div class="section-label">
       <span class="section-num">04</span>
+      <span class="section-title">(Само)образование</span>
+    </div>
+    <div class="edu-row">
+      <div class="job-date">2015 —<br>2018</div>
+      <div>
+        <div class="edu-inst">Université Paris Nanterre</div>
+        <div class="edu-topic">Humanités («Гуманитарный факультет»)</div>
+      </div>
+    </div>
+    <div class="edu-row">
+      <div class="job-date">2021 —<br>∞</div>
+      <div>
+        <div class="edu-inst">Курсы и самостоятельное обучение</div>
+        <div class="edu-topic">Исследования аудитории, маркетинг, брендинг, управление проектами, продуктовый менеджмент, методология исследований</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Я В КАРТИНКАХ И СЛОВАХ -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-title">Я в картинках и словах</span>
+    </div>
+    <div class="about-grid">
+      <div class="ap-frame ap1"><img src="https://i.ibb.co/fYkp8FFf/IMG-3342.avif" alt="Прогулка вдоль набережной" loading="lazy"></div>
+      <div class="ap-frame ap2"><img src="https://i.ibb.co/W4YThPvb/IMG-4242.jpg" alt="Вид из окна автобуса" loading="lazy"></div>
+      <div class="ap-frame ap3"><img src="https://i.ibb.co/rGvmpBzN/IMG-3494.avif" alt="Автопортрет на ветру" loading="lazy"></div>
+      <div class="ap-frame ap4"><img src="https://i.ibb.co/Ldx5N7Jg/photo-5918073379359493639-y.jpg" alt="Находка в дороге" loading="lazy"></div>
+      <div class="ap-frame ap5"><img src="https://i.ibb.co/JjHvXWQS/photo-5918073379359493677-y.jpg" alt="Вечерняя набережная через окно" loading="lazy"></div>
+      <div class="ap-frame ap6"><img src="https://i.ibb.co/VWCFyw7L/photo-5918073379359493685-y.jpg" alt="Находка в лесу" loading="lazy"></div>
+      <div class="ap-text">
+        <p>Мне нравится долго разбираться в устройстве вещей — будь то продукт, книга, музыкальная сцена или город. <strong>Любопытство</strong> — качество, которое лучше всего описывает меня и в работе, и вне её.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 КОНТАКТЫ -->
+<section id="contact" style="border-bottom: none;">
+  <div class="container">
+    <div class="section-label">
+      <span class="section-num">06</span>
       <span class="section-title">Контакты</span>
     </div>
     <div class="contact-grid" style="padding: 2rem 0 4rem;">
       <div>
-        <p class="contact-note" style="color:var(--black); font-size:14px; line-height:1.85;">Открыта к предложениям на стыке маркетинга, продукта и стратегии. Рассматриваю как проектную работу, так и полную занятость. Готова к удалённой работе.</p>
+        <p class="contact-note">Открыта к предложениям на стыке исследований, продукта и маркетинга. Рассматриваю проектную работу, удалённый формат.</p>
       </div>
       <div>
         <div class="contact-row">
@@ -1335,7 +1097,7 @@
 <footer>
   <div class="container">
     <span>Алина Грахова · 2026</span>
-    <span>Продуктовый маркетолог</span>
+    <span>Ресерчер</span>
   </div>
 </footer>
 
